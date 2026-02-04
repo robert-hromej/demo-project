@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 # RuboCop configuration for Rails 8 API project
 # Includes: Rails, RSpec, Performance cops with sensible defaults
 
@@ -371,6 +373,7 @@ Rails/RedundantActiveRecordAllMethod:
 Rails/DeprecatedActiveModelErrorsMethods:
   Exclude:
     - "app/services/application_service.rb"  # Uses dry-validation, not ActiveModel::Errors
+    - "app/services/**/*"  # Service classes use errors.messages for API responses
 
 # ==============================================================================
 # RSpec

@@ -1,18 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  mount Api::Root => "/"
+
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # API routes (Grape will be mounted here)
-  # mount API::Base => "/api"
-
   # SPA catch-all route - must be last
-  get "*path", to: "spa#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+  get "*path", to: "spa#index", constraints: ->(req) { !req.path.start_with?("/api") }
   root "spa#index"
 end

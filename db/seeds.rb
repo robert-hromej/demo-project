@@ -20,28 +20,28 @@ users = [
   User.create!(
     email: "admin@example.com",
     password: "password123",
-    name: "Адміністратор"
+    name: "Адміністратор",
   ),
   User.create!(
     email: "maria@example.com",
     password: "password123",
-    name: "Марія Коваленко"
+    name: "Марія Коваленко",
   ),
   User.create!(
     email: "ivan@example.com",
     password: "password123",
-    name: "Іван Петренко"
+    name: "Іван Петренко",
   ),
   User.create!(
     email: "olena@example.com",
     password: "password123",
-    name: "Олена Шевченко"
+    name: "Олена Шевченко",
   ),
   User.create!(
     email: "taras@example.com",
     password: "password123",
-    name: "Тарас Бондаренко"
-  )
+    name: "Тарас Бондаренко",
+  ),
 ]
 puts "  Created #{users.size} users"
 
@@ -55,18 +55,21 @@ sniданki = Category.create!(name: "Сніданки", position: 1, descriptio
 obidy = Category.create!(name: "Обіди", position: 2, description: "Основні страви дня")
 vecheri = Category.create!(name: "Вечері", position: 3, description: "Страви для вечірнього прийому їжі")
 deserty = Category.create!(name: "Десерти", position: 4, description: "Солодкі страви та випічка")
-napoi = Category.create!(name: "Напої", position: 5, description: "Гарячі та холодні напої")
+Category.create!(name: "Напої", position: 5, description: "Гарячі та холодні напої")
 
 # Subcategories for Сніданки
 Category.create!(name: "Каші", parent: sniданki, position: 1, description: "Різноманітні каші на воді та молоці")
-stravi_z_yaets = Category.create!(name: "Страви з яєць", parent: sniданki, position: 2, description: "Омлети, яєчні та інші страви з яєць")
+stravi_z_yaets = Category.create!(name: "Страви з яєць", parent: sniданki, position: 2,
+                                  description: "Омлети, яєчні та інші страви з яєць",)
 
 # Subcategories for Обіди
 supy = Category.create!(name: "Супи", parent: obidy, position: 1, description: "Перші страви: борщі, супи, юшки")
-drugi_stravy = Category.create!(name: "Другі страви", parent: obidy, position: 2, description: "Основні страви з м'ясом та гарнірами")
+drugi_stravy = Category.create!(name: "Другі страви", parent: obidy, position: 2,
+                                description: "Основні страви з м'ясом та гарнірами",)
 
 # Subcategories for Вечері
-legki_stravy = Category.create!(name: "Легкі страви", parent: vecheri, position: 1, description: "Легкі страви для вечері")
+legki_stravy = Category.create!(name: "Легкі страви", parent: vecheri, position: 1,
+                                description: "Легкі страви для вечері",)
 
 puts "  Created #{Category.count} categories"
 
@@ -93,9 +96,11 @@ ingredients_data = [
   { name: "cucumber", name_uk: "Огірки", category: "vegetables", default_unit: "g", unit_price_cents: 7 },
   { name: "cabbage", name_uk: "Капуста білокачанна", category: "vegetables", default_unit: "g", unit_price_cents: 2 },
   { name: "beetroot", name_uk: "Буряк", category: "vegetables", default_unit: "g", unit_price_cents: 3 },
-  { name: "bell_pepper", name_uk: "Перець болгарський", category: "vegetables", default_unit: "g", unit_price_cents: 12 },
+  { name: "bell_pepper", name_uk: "Перець болгарський", category: "vegetables", default_unit: "g",
+    unit_price_cents: 12, },
   { name: "green_peas", name_uk: "Горошок зелений", category: "vegetables", default_unit: "g", unit_price_cents: 8 },
-  { name: "pickled_cucumber", name_uk: "Огірки мариновані", category: "vegetables", default_unit: "g", unit_price_cents: 10 },
+  { name: "pickled_cucumber", name_uk: "Огірки мариновані", category: "vegetables", default_unit: "g",
+    unit_price_cents: 10, },
 
   # Meat - М'ясо
   { name: "chicken_breast", name_uk: "Куряче філе", category: "meat", default_unit: "g", unit_price_cents: 25 },
@@ -128,7 +133,7 @@ ingredients_data = [
   { name: "mayonnaise", name_uk: "Майонез", category: "other", default_unit: "g", unit_price_cents: 12 },
   { name: "tomato_paste", name_uk: "Томатна паста", category: "other", default_unit: "g", unit_price_cents: 15 },
   { name: "baking_powder", name_uk: "Розпушувач", category: "other", default_unit: "g", unit_price_cents: 30 },
-  { name: "vanilla_sugar", name_uk: "Цукор ванільний", category: "other", default_unit: "g", unit_price_cents: 100 }
+  { name: "vanilla_sugar", name_uk: "Цукор ванільний", category: "other", default_unit: "g", unit_price_cents: 100 },
 ]
 
 ingredients = {}
@@ -169,8 +174,8 @@ recipes_data = [
       { ingredient: "milk", quantity: 100, unit: "ml" },
       { ingredient: "butter", quantity: 20, unit: "g" },
       { ingredient: "salt", quantity: 2, unit: "g" },
-      { ingredient: "black_pepper", quantity: 1, unit: "g", optional: true }
-    ]
+      { ingredient: "black_pepper", quantity: 1, unit: "g", optional: true },
+    ],
   },
 
   # 2. Вівсяна каша
@@ -195,8 +200,8 @@ recipes_data = [
       { ingredient: "milk", quantity: 400, unit: "ml" },
       { ingredient: "sugar", quantity: 20, unit: "g" },
       { ingredient: "salt", quantity: 2, unit: "g" },
-      { ingredient: "butter", quantity: 15, unit: "g" }
-    ]
+      { ingredient: "butter", quantity: 15, unit: "g" },
+    ],
   },
 
   # 3. Борщ український
@@ -236,8 +241,8 @@ recipes_data = [
       { ingredient: "black_pepper", quantity: 3, unit: "g" },
       { ingredient: "bay_leaf", quantity: 2, unit: "pcs" },
       { ingredient: "sour_cream", quantity: 100, unit: "g", notes: "для подачі" },
-      { ingredient: "dill", quantity: 20, unit: "g", notes: "для подачі" }
-    ]
+      { ingredient: "dill", quantity: 20, unit: "g", notes: "для подачі" },
+    ],
   },
 
   # 4. Вареники з картоплею
@@ -268,8 +273,8 @@ recipes_data = [
       { ingredient: "onion", quantity: 200, unit: "g" },
       { ingredient: "sunflower_oil", quantity: 50, unit: "ml" },
       { ingredient: "salt", quantity: 10, unit: "g" },
-      { ingredient: "sour_cream", quantity: 150, unit: "g", notes: "для подачі" }
-    ]
+      { ingredient: "sour_cream", quantity: 150, unit: "g", notes: "для подачі" },
+    ],
   },
 
   # 5. Котлети по-київськи
@@ -302,8 +307,8 @@ recipes_data = [
       { ingredient: "bread", quantity: 100, unit: "g", notes: "панірувальні сухарі" },
       { ingredient: "sunflower_oil", quantity: 200, unit: "ml" },
       { ingredient: "salt", quantity: 5, unit: "g" },
-      { ingredient: "black_pepper", quantity: 2, unit: "g" }
-    ]
+      { ingredient: "black_pepper", quantity: 2, unit: "g" },
+    ],
   },
 
   # 6. Млинці
@@ -333,8 +338,8 @@ recipes_data = [
       { ingredient: "eggs", quantity: 3, unit: "pcs" },
       { ingredient: "sugar", quantity: 30, unit: "g" },
       { ingredient: "salt", quantity: 3, unit: "g" },
-      { ingredient: "sunflower_oil", quantity: 30, unit: "ml" }
-    ]
+      { ingredient: "sunflower_oil", quantity: 30, unit: "ml" },
+    ],
   },
 
   # 7. Сирники
@@ -366,8 +371,8 @@ recipes_data = [
       { ingredient: "vanilla_sugar", quantity: 10, unit: "g" },
       { ingredient: "baking_powder", quantity: 5, unit: "g" },
       { ingredient: "sunflower_oil", quantity: 50, unit: "ml" },
-      { ingredient: "sour_cream", quantity: 100, unit: "g", notes: "для подачі" }
-    ]
+      { ingredient: "sour_cream", quantity: 100, unit: "g", notes: "для подачі" },
+    ],
   },
 
   # 8. Салат Олів'є
@@ -401,8 +406,8 @@ recipes_data = [
       { ingredient: "mayonnaise", quantity: 200, unit: "g" },
       { ingredient: "salt", quantity: 5, unit: "g" },
       { ingredient: "black_pepper", quantity: 2, unit: "g", optional: true },
-      { ingredient: "dill", quantity: 10, unit: "g", notes: "для прикраси" }
-    ]
+      { ingredient: "dill", quantity: 10, unit: "g", notes: "для прикраси" },
+    ],
   },
 
   # 9. Деруни
@@ -434,8 +439,8 @@ recipes_data = [
       { ingredient: "salt", quantity: 8, unit: "g" },
       { ingredient: "black_pepper", quantity: 2, unit: "g" },
       { ingredient: "sunflower_oil", quantity: 150, unit: "ml" },
-      { ingredient: "sour_cream", quantity: 150, unit: "g", notes: "для подачі" }
-    ]
+      { ingredient: "sour_cream", quantity: 150, unit: "g", notes: "для подачі" },
+    ],
   },
 
   # 10. Запіканка сирна
@@ -468,8 +473,8 @@ recipes_data = [
       { ingredient: "vanilla_sugar", quantity: 10, unit: "g" },
       { ingredient: "semolina", quantity: 60, unit: "g" },
       { ingredient: "sour_cream", quantity: 100, unit: "g" },
-      { ingredient: "butter", quantity: 20, unit: "g", notes: "для змащування форми" }
-    ]
+      { ingredient: "butter", quantity: 20, unit: "g", notes: "для змащування форми" },
+    ],
   },
 
   # 11. Гречана каша з грибами
@@ -497,8 +502,8 @@ recipes_data = [
       { ingredient: "onion", quantity: 150, unit: "g" },
       { ingredient: "butter", quantity: 30, unit: "g" },
       { ingredient: "sunflower_oil", quantity: 30, unit: "ml" },
-      { ingredient: "salt", quantity: 5, unit: "g" }
-    ]
+      { ingredient: "salt", quantity: 5, unit: "g" },
+    ],
   },
 
   # 12. Яєчня з беконом
@@ -528,8 +533,8 @@ recipes_data = [
       { ingredient: "sunflower_oil", quantity: 20, unit: "ml" },
       { ingredient: "salt", quantity: 3, unit: "g" },
       { ingredient: "black_pepper", quantity: 1, unit: "g" },
-      { ingredient: "parsley", quantity: 10, unit: "g", notes: "для подачі" }
-    ]
+      { ingredient: "parsley", quantity: 10, unit: "g", notes: "для подачі" },
+    ],
   },
 
   # 13. Манна каша
@@ -558,8 +563,8 @@ recipes_data = [
       { ingredient: "milk", quantity: 400, unit: "ml" },
       { ingredient: "sugar", quantity: 25, unit: "g" },
       { ingredient: "salt", quantity: 2, unit: "g" },
-      { ingredient: "butter", quantity: 20, unit: "g" }
-    ]
+      { ingredient: "butter", quantity: 20, unit: "g" },
+    ],
   },
 
   # 14. Салат з капусти
@@ -588,8 +593,8 @@ recipes_data = [
       { ingredient: "vinegar", quantity: 15, unit: "ml" },
       { ingredient: "sugar", quantity: 10, unit: "g" },
       { ingredient: "salt", quantity: 5, unit: "g" },
-      { ingredient: "dill", quantity: 15, unit: "g" }
-    ]
+      { ingredient: "dill", quantity: 15, unit: "g" },
+    ],
   },
 
   # 15. Пюре картопляне
@@ -617,9 +622,9 @@ recipes_data = [
       { ingredient: "potato", quantity: 800, unit: "g" },
       { ingredient: "milk", quantity: 200, unit: "ml" },
       { ingredient: "butter", quantity: 50, unit: "g" },
-      { ingredient: "salt", quantity: 8, unit: "g" }
-    ]
-  }
+      { ingredient: "salt", quantity: 8, unit: "g" },
+    ],
+  },
 ]
 
 recipes = []
@@ -637,7 +642,7 @@ recipes_data.each do |data|
       quantity: item[:quantity],
       unit: item[:unit],
       optional: item[:optional] || false,
-      notes: item[:notes]
+      notes: item[:notes],
     )
   end
 
@@ -721,7 +726,7 @@ ratings_data = [
 
   # Пюре
   { recipe_index: 14, user_index: 2, score: 5, review: "Найкраще пюре - з гарячим молоком!" },
-  { recipe_index: 14, user_index: 3, score: 5, review: "Класика, яка ніколи не набридає." }
+  { recipe_index: 14, user_index: 3, score: 5, review: "Класика, яка ніколи не набридає." },
 ]
 
 ratings_data.each do |data|
@@ -729,7 +734,7 @@ ratings_data.each do |data|
     recipe: recipes[data[:recipe_index]],
     user: users[data[:user_index]],
     score: data[:score],
-    review: data[:review]
+    review: data[:review],
   )
 end
 
@@ -738,11 +743,13 @@ puts "  Created #{Rating.count} ratings"
 # ============================================================================
 # Summary
 # ============================================================================
-puts "\n" + "=" * 60
+puts "\n#{"=" * 60}"
 puts "Seeding complete!"
 puts "=" * 60
 puts "Users:             #{User.count}"
-puts "Categories:        #{Category.count} (#{Category.roots.count} root, #{Category.count - Category.roots.count} children)"
+root_count = Category.roots.count
+children_count = Category.count - root_count
+puts "Categories:        #{Category.count} (#{root_count} root, #{children_count} children)"
 puts "Ingredients:       #{Ingredient.count}"
 puts "Recipes:           #{Recipe.count}"
 puts "Recipe Ingredients: #{RecipeIngredient.count}"

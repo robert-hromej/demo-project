@@ -3,7 +3,7 @@
 require "dry/monads"
 
 # Custom matchers for Dry::Monads::Result
-RSpec::Matchers.define :be_success do |expected_value = nil|
+RSpec::Matchers.define :be_monad_success do |expected_value = nil|
   match do |actual|
     return false unless actual.is_a?(Dry::Monads::Result::Success)
     return true if expected_value.nil?
@@ -24,7 +24,7 @@ RSpec::Matchers.define :be_success do |expected_value = nil|
   end
 end
 
-RSpec::Matchers.define :be_failure do |expected_value = nil|
+RSpec::Matchers.define :be_monad_failure do |expected_value = nil|
   match do |actual|
     return false unless actual.is_a?(Dry::Monads::Result::Failure)
     return true if expected_value.nil?

@@ -17,7 +17,7 @@ class Recipe < ApplicationRecord
 
   scope :published, -> { where.not(title: nil) }
   scope :by_difficulty, ->(diff) { where(difficulty: diff) }
-  scope :within_budget, ->(cents) { where("est_cost_cents <= ?", cents) }
+  scope :within_budget, ->(cents) { where(est_cost_cents: ..cents) }
   scope :by_rating, -> { order(avg_rating: :desc) }
   scope :by_cost, -> { order(:est_cost_cents) }
 
@@ -32,9 +32,7 @@ class Recipe < ApplicationRecord
   end
 
   def recalculate_cost!
-    total = recipe_ingredients.includes(:ingredient).sum do |ri|
-      ri.estimated_cost_cents
-    end
+    total = recipe_ingredients.includes(:ingredient).sum(&:estimated_cost_cents)
     update!(est_cost_cents: total)
   end
 
@@ -42,7 +40,7 @@ class Recipe < ApplicationRecord
     stats = ratings.pick(Arel.sql("AVG(score) as avg, COUNT(*) as cnt"))
     update!(
       avg_rating: stats[0] || 0,
-      ratings_count: stats[1] || 0
+      ratings_count: stats[1] || 0,
     )
   end
 end

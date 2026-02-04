@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Ingredient < ApplicationRecord
-  UNITS = %w[g kg ml l pcs tbsp tsp cup].freeze
-  CATEGORIES = %w[dairy vegetables fruits meat fish grains spices oils other].freeze
+  UNITS = ["g", "kg", "ml", "l", "pcs", "tbsp", "tsp", "cup"].freeze
+  CATEGORIES = ["dairy", "vegetables", "fruits", "meat", "fish", "grains", "spices", "oils", "other"].freeze
 
   has_many :recipe_ingredients, dependent: :restrict_with_error
   has_many :recipes, through: :recipe_ingredients
