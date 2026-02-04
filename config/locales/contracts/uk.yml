@@ -1,0 +1,19 @@
+uk:
+  contracts:
+    errors:
+      rules:
+        invalid_email: "має невірний формат електронної пошти"
+        weak_password: "повинен містити щонайменше 8 символів"
+        invalid_sort_direction: "повинен бути 'asc' або 'desc'"
+        invalid_per_page: "повинен бути між 1 та %{max}"
+        already_exists: "вже існує"
+        not_found: "не знайдено"
+        blank: "не може бути порожнім"
+        too_short: "занадто короткий (мінімум %{min} символів)"
+        too_long: "занадто довгий (максимум %{max} символів)"
+        invalid_format: "має невірний формат"
+        invalid_date: "не є дійсною датою"
+        must_be_positive: "повинен бути позитивним числом"
+        must_be_in_range: "повинен бути між %{min} та %{max}"
+        invalid_status: "не є дійсним статусом"
+        unauthorized: "ви не маєте права виконувати цю дію"

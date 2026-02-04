@@ -1,0 +1,535 @@
+# RuboCop configuration for Rails 8 API project
+# Includes: Rails, RSpec, Performance cops with sensible defaults
+
+plugins:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  TargetRubyVersion: 3.4
+  TargetRailsVersion: 8.1
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - "vendor/**/*"
+    - "node_modules/**/*"
+    - "db/schema.rb"
+    - "db/migrate/*.rb"
+    - "bin/**/*"
+    - "tmp/**/*"
+    - "log/**/*"
+    - "public/**/*"
+    - "storage/**/*"
+    - ".git/**/*"
+    - "config/initializers/devise.rb"
+    - "config/environments/*.rb"
+
+# ==============================================================================
+# Layout
+# ==============================================================================
+
+Layout/LineLength:
+  Max: 120
+  AllowedPatterns:
+    - "^\\s*#"  # Allow long comments
+    - "https?://"  # Allow long URLs
+  Exclude:
+    - "spec/**/*"
+    - "config/**/*"
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_first_argument
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: no_empty_lines
+
+Layout/EmptyLinesAroundModuleBody:
+  EnforcedStyle: no_empty_lines
+
+# ==============================================================================
+# Metrics
+# ==============================================================================
+
+Metrics/ClassLength:
+  Max: 150
+  Exclude:
+    - "spec/**/*"
+    - "app/api/**/*"
+
+Metrics/ModuleLength:
+  Max: 150
+  Exclude:
+    - "spec/**/*"
+    - "app/api/**/*"
+
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - "spec/**/*"
+    - "db/migrate/*.rb"
+
+Metrics/BlockLength:
+  Max: 25
+  Exclude:
+    - "spec/**/*"
+    - "config/**/*"
+    - "lib/tasks/**/*"
+    - "app/api/**/*"
+    - "Rakefile"
+  AllowedMethods:
+    - configure
+    - context
+    - define
+    - describe
+    - draw
+    - factory
+    - feature
+    - it
+    - let
+    - namespace
+    - params
+    - resource
+    - resources
+    - route_param
+    - scenario
+    - setup
+    - shared_context
+    - shared_examples
+    - shared_examples_for
+    - specify
+    - transaction
+
+Metrics/AbcSize:
+  Max: 25
+  Exclude:
+    - "spec/**/*"
+    - "db/migrate/*.rb"
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+  Exclude:
+    - "spec/**/*"
+
+Metrics/PerceivedComplexity:
+  Max: 10
+  Exclude:
+    - "spec/**/*"
+
+Metrics/ParameterLists:
+  Max: 6
+  CountKeywordArgs: false
+
+# ==============================================================================
+# Style
+# ==============================================================================
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
+  SafeAutoCorrect: true
+  Exclude:
+    - "db/migrate/*.rb"
+    - "spec/**/*"
+    - "config/**/*"
+    - "Gemfile"
+    - "Rakefile"
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/WordArray:
+  EnforcedStyle: brackets
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+  EnforcedShorthandSyntax: either
+
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
+  AllowedMethods:
+    - expect
+    - let
+    - let!
+    - subject
+    - watch
+    - change
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/GuardClause:
+  MinBodyLength: 3
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: ()
+    "%i": "[]"
+    "%I": "[]"
+    "%w": "[]"
+    "%W": "[]"
+
+Style/RedundantSelf:
+  Enabled: true
+
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/AccessorGrouping:
+  Enabled: true
+  EnforcedStyle: grouped
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/OptionalBooleanParameter:
+  Enabled: false
+
+# ==============================================================================
+# Naming
+# ==============================================================================
+
+Naming/PredicatePrefix:
+  ForbiddenPrefixes:
+    - is_
+  AllowedMethods:
+    - is_a?
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+  AllowedIdentifiers:
+    - v1
+    - v2
+    - api_v1
+    - api_v2
+
+Naming/MethodParameterName:
+  MinNameLength: 2
+  AllowedNames:
+    - id
+    - to
+    - at
+    - by
+    - on
+    - in
+    - of
+    - db
+    - io
+    - ip
+    - _
+
+Naming/RescuedExceptionsVariableName:
+  PreferredName: error
+
+Naming/BlockForwarding:
+  EnforcedStyle: explicit
+
+# ==============================================================================
+# Lint
+# ==============================================================================
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"
+
+Lint/EmptyBlock:
+  Exclude:
+    - "spec/**/*"
+
+Lint/MissingSuper:
+  Enabled: false
+
+Lint/UnusedMethodArgument:
+  AllowUnusedKeywordArguments: true
+
+# ==============================================================================
+# Rails
+# ==============================================================================
+
+Rails:
+  Enabled: true
+
+Rails/FilePath:
+  EnforcedStyle: arguments
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: true
+
+Rails/InverseOf:
+  Enabled: true
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: true
+
+Rails/OutputSafety:
+  Enabled: true
+
+Rails/SkipsModelValidations:
+  Enabled: true
+  AllowedMethods:
+    - touch
+    - increment!
+    - decrement!
+    - update_column
+    - update_columns
+
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+
+Rails/DynamicFindBy:
+  AllowedMethods:
+    - find_by_sql
+    - find_by_token
+
+Rails/ApplicationController:
+  Exclude:
+    - "app/api/**/*"
+
+Rails/ApplicationRecord:
+  Exclude:
+    - "db/migrate/*.rb"
+
+Rails/RakeEnvironment:
+  Enabled: false
+
+Rails/Output:
+  Exclude:
+    - "db/seeds.rb"
+    - "lib/tasks/**/*"
+
+Rails/BulkChangeTable:
+  Enabled: false
+
+Rails/ReversibleMigration:
+  Enabled: true
+
+Rails/NotNullColumn:
+  Enabled: false
+
+Rails/ThreeStateBooleanColumn:
+  Enabled: false
+
+Rails/RedundantActiveRecordAllMethod:
+  Enabled: false
+
+Rails/DeprecatedActiveModelErrorsMethods:
+  Exclude:
+    - "app/services/application_service.rb"  # Uses dry-validation, not ActiveModel::Errors
+
+# ==============================================================================
+# RSpec
+# ==============================================================================
+
+RSpec:
+  Enabled: true
+
+RSpec/ExampleLength:
+  Max: 25
+  CountAsOne:
+    - array
+    - hash
+    - heredoc
+    - method_call
+
+RSpec/MultipleExpectations:
+  Max: 8
+
+RSpec/NestedGroups:
+  Max: 5
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+
+RSpec/ContextWording:
+  Prefixes:
+    - when
+    - with
+    - without
+    - if
+    - unless
+    - for
+    - and
+    - given
+
+RSpec/DescribeClass:
+  Exclude:
+    - "spec/requests/**/*"
+    - "spec/integration/**/*"
+    - "spec/system/**/*"
+    - "spec/features/**/*"
+    - "spec/api/**/*"
+    - "spec/routing/**/*"
+
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+RSpec/SpecFilePathSuffix:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/VerifiedDoubles:
+  Enabled: true
+
+RSpec/StubbedMock:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/ImplicitSubject:
+  EnforcedStyle: single_statement_only
+
+RSpec/InstanceVariable:
+  Exclude:
+    - "spec/support/**/*"
+
+RSpec/EmptyExampleGroup:
+  Enabled: true
+
+RSpec/RepeatedExample:
+  Enabled: true
+
+RSpec/RepeatedDescription:
+  Enabled: true
+
+RSpec/DescribedClass:
+  EnforcedStyle: described_class
+
+RSpec/NoExpectationExample:
+  Enabled: false
+
+RSpec/IndexedLet:
+  Enabled: false
+
+RSpec/PendingWithoutReason:
+  Enabled: false
+
+RSpec/ReceiveMessages:
+  Enabled: false
+
+RSpec/MessageChain:
+  Enabled: false
+
+# ==============================================================================
+# Performance
+# ==============================================================================
+
+Performance:
+  Enabled: true
+
+Performance/Casecmp:
+  Enabled: true
+
+Performance/Count:
+  Enabled: true
+
+Performance/Detect:
+  Enabled: true
+
+Performance/FlatMap:
+  Enabled: true
+
+Performance/MapCompact:
+  Enabled: true
+
+Performance/RedundantMerge:
+  Enabled: true
+
+Performance/SelectMap:
+  Enabled: true
+
+Performance/Size:
+  Enabled: true
+
+Performance/StringReplacement:
+  Enabled: true
+
+Performance/Sum:
+  Enabled: true
+
+Performance/CollectionLiteralInLoop:
+  Enabled: true
+
+# ==============================================================================
+# Bundler
+# ==============================================================================
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Bundler/DuplicatedGem:
+  Enabled: true
+
+# ==============================================================================
+# Gemspec
+# ==============================================================================
+
+Gemspec/DeprecatedAttributeAssignment:
+  Enabled: true
+
+Gemspec/RequireMFA:
+  Enabled: false

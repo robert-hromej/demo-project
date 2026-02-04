@@ -1,0 +1,19 @@
+en:
+  contracts:
+    errors:
+      rules:
+        invalid_email: "has invalid email format"
+        weak_password: "must be at least 8 characters"
+        invalid_sort_direction: "must be 'asc' or 'desc'"
+        invalid_per_page: "must be between 1 and %{max}"
+        already_exists: "already exists"
+        not_found: "not found"
+        blank: "cannot be blank"
+        too_short: "is too short (minimum is %{min} characters)"
+        too_long: "is too long (maximum is %{max} characters)"
+        invalid_format: "has invalid format"
+        invalid_date: "is not a valid date"
+        must_be_positive: "must be a positive number"
+        must_be_in_range: "must be between %{min} and %{max}"
+        invalid_status: "is not a valid status"
+        unauthorized: "you are not authorized to perform this action"
