@@ -109,14 +109,14 @@ RSpec.describe "API V1 Ingredients", type: :request do
       it "returns validation error for missing name" do
         post "/api/v1/ingredients", params: { name_uk: "Only Ukrainian" }, headers: auth_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:error]).to be_present
       end
 
       it "returns validation error for missing name_uk" do
         post "/api/v1/ingredients", params: { name: "Only English" }, headers: auth_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:error]).to be_present
       end
 
@@ -125,7 +125,7 @@ RSpec.describe "API V1 Ingredients", type: :request do
 
         post "/api/v1/ingredients", params: params, headers: auth_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:error][:code]).to eq("validation_error")
       end
 
@@ -134,7 +134,7 @@ RSpec.describe "API V1 Ingredients", type: :request do
 
         post "/api/v1/ingredients", params: valid_params.merge(name: "Existing"), headers: auth_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:error][:details][:name]).to be_present
       end
     end
@@ -180,14 +180,14 @@ RSpec.describe "API V1 Ingredients", type: :request do
       it "returns validation error for empty name" do
         put "/api/v1/ingredients/#{ingredient.id}", params: { name: "" }, headers: auth_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:error][:code]).to eq("validation_error")
       end
 
       it "returns validation error for invalid unit" do
         put "/api/v1/ingredients/#{ingredient.id}", params: { default_unit: "invalid" }, headers: auth_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:error][:code]).to eq("validation_error")
       end
 
@@ -196,7 +196,7 @@ RSpec.describe "API V1 Ingredients", type: :request do
 
         put "/api/v1/ingredients/#{ingredient.id}", params: { name: "Existing" }, headers: auth_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:error][:details][:name]).to be_present
       end
 

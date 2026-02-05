@@ -228,7 +228,7 @@ RSpec.describe "Search API", type: :request do
              headers: json_headers
 
         # Grape returns 400 for empty array validation failure
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "returns error when ingredient_ids is missing" do
@@ -236,7 +236,7 @@ RSpec.describe "Search API", type: :request do
              params: {}.to_json,
              headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end
@@ -404,7 +404,7 @@ RSpec.describe "Search API", type: :request do
              params: {}.to_json,
              headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "returns error when budget_cents is zero" do
@@ -412,7 +412,7 @@ RSpec.describe "Search API", type: :request do
              params: { budget_cents: 0 }.to_json,
              headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "returns error when budget_cents is negative" do
@@ -420,7 +420,7 @@ RSpec.describe "Search API", type: :request do
              params: { budget_cents: -100 }.to_json,
              headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end

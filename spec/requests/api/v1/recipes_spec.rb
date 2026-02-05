@@ -147,20 +147,20 @@ RSpec.describe "Api::V1::Recipes", type: :request do
       it "rejects invalid difficulty" do
         get "/api/v1/recipes", params: { difficulty: "impossible" }, headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_response[:error][:code]).to eq("validation_error")
       end
 
       it "rejects invalid sort value" do
         get "/api/v1/recipes", params: { sort: "invalid" }, headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "rejects invalid order value" do
         get "/api/v1/recipes", params: { order: "invalid" }, headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end
@@ -277,7 +277,7 @@ RSpec.describe "Api::V1::Recipes", type: :request do
 
           post "/api/v1/recipes", params: invalid_params, headers: headers_with_auth
 
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
           expect(json_response[:error][:code]).to eq("validation_error")
         end
 
@@ -286,7 +286,7 @@ RSpec.describe "Api::V1::Recipes", type: :request do
 
           post "/api/v1/recipes", params: invalid_params, headers: headers_with_auth
 
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
 
         it "returns error when prep_time_min is missing" do
@@ -294,7 +294,7 @@ RSpec.describe "Api::V1::Recipes", type: :request do
 
           post "/api/v1/recipes", params: invalid_params, headers: headers_with_auth
 
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
 
         it "returns error when cook_time_min is missing" do
@@ -302,7 +302,7 @@ RSpec.describe "Api::V1::Recipes", type: :request do
 
           post "/api/v1/recipes", params: invalid_params, headers: headers_with_auth
 
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
     end

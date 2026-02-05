@@ -89,7 +89,7 @@ RSpec.describe "API V1 Categories", type: :request do
       it "returns validation error for missing name" do
         post "/api/v1/categories", params: { description: "No name" }, headers: auth_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         # Grape returns validation error in array format for missing required params
         expect(json_body[:error]).to be_present
       end
@@ -97,7 +97,7 @@ RSpec.describe "API V1 Categories", type: :request do
       it "returns validation error for invalid params" do
         post "/api/v1/categories", params: { name: "" }, headers: auth_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:error][:code]).to eq("validation_error")
       end
     end
@@ -143,7 +143,7 @@ RSpec.describe "API V1 Categories", type: :request do
       it "returns validation error for invalid params" do
         put "/api/v1/categories/#{category.id}", params: { name: "" }, headers: auth_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(json_body[:error][:code]).to eq("validation_error")
       end
     end

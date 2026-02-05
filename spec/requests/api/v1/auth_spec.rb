@@ -61,19 +61,19 @@ RSpec.describe "Api::V1::Auth", type: :request do
       it "returns validation error for missing email" do
         post "/api/v1/auth/register", params: valid_params.except(:email).to_json, headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "returns validation error for missing password" do
         post "/api/v1/auth/register", params: valid_params.except(:password).to_json, headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "returns validation error for missing name" do
         post "/api/v1/auth/register", params: valid_params.except(:name).to_json, headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end
@@ -123,13 +123,13 @@ RSpec.describe "Api::V1::Auth", type: :request do
       it "returns validation error for missing email" do
         post "/api/v1/auth/login", params: valid_params.except(:email).to_json, headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "returns validation error for missing password" do
         post "/api/v1/auth/login", params: valid_params.except(:password).to_json, headers: json_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end

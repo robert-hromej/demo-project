@@ -127,7 +127,7 @@ RSpec.describe "Api::V1::Ratings", type: :request do
                params: { score: 0 }.to_json,
                headers: authenticated_headers(token: token)
 
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
 
         it "returns validation error for score above 5" do
@@ -135,7 +135,7 @@ RSpec.describe "Api::V1::Ratings", type: :request do
                params: { score: 6 }.to_json,
                headers: authenticated_headers(token: token)
 
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
 
@@ -145,7 +145,7 @@ RSpec.describe "Api::V1::Ratings", type: :request do
                params: { review: "Nice!" }.to_json,
                headers: authenticated_headers(token: token)
 
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
 
