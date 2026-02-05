@@ -1,4 +1,5 @@
 import { QueryClient, QueryCache, MutationCache } from "@tanstack/react-query";
+import { useAuthStore } from "@/stores/auth";
 import type { ApiError } from "@/types";
 
 // Default configuration for queries
@@ -10,9 +11,7 @@ function handleQueryError(error: unknown): void {
   const apiError = error as ApiError;
 
   if (apiError.status === 401) {
-    // Handle unauthorized - could dispatch to auth store
-    console.error("Unauthorized request - please login again");
-    // Could trigger logout or redirect to login
+    useAuthStore.getState().logout();
   } else if (apiError.status === 403) {
     console.error("Forbidden - you do not have permission for this action");
   } else if (apiError.status === 404) {
