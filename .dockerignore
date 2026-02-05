@@ -35,6 +35,8 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 /public/assets
+/public/vite-dev
+/public/vite-test
 
 # Ignore CI service files.
 /.github
@@ -48,4 +50,3 @@
 
 # Ignore Docker-related files
 /.dockerignore
-/Dockerfile*
