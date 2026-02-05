@@ -11,6 +11,8 @@ const SearchByIngredientsPage = React.lazy(() => import("@/pages/search/SearchBy
 const SearchByBudgetPage = React.lazy(() => import("@/pages/search/SearchByBudgetPage"));
 const LoginPage = React.lazy(() => import("@/pages/auth/LoginPage"));
 const RegisterPage = React.lazy(() => import("@/pages/auth/RegisterPage"));
+const RecipeCreatePage = React.lazy(() => import("@/pages/recipes/RecipeCreatePage"));
+const RecipeEditPage = React.lazy(() => import("@/pages/recipes/RecipeEditPage"));
 const NotFoundPage = React.lazy(() => import("@/pages/NotFoundPage"));
 
 // Loading fallback for lazy-loaded components
@@ -159,12 +161,22 @@ export const router = createBrowserRouter([
       {
         element: <ProtectedRoute />,
         children: [
-          // Add protected routes here as needed
-          // Example:
-          // {
-          //   path: "profile",
-          //   element: <SuspenseWrapper><ProfilePage /></SuspenseWrapper>,
-          // },
+          {
+            path: "recipes/new",
+            element: (
+              <SuspenseWrapper>
+                <RecipeCreatePage />
+              </SuspenseWrapper>
+            ),
+          },
+          {
+            path: "recipes/:id/edit",
+            element: (
+              <SuspenseWrapper>
+                <RecipeEditPage />
+              </SuspenseWrapper>
+            ),
+          },
         ],
       },
 

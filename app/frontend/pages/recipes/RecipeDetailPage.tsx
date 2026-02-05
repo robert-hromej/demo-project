@@ -1,20 +1,64 @@
-import { useParams, Link } from "react-router-dom";
+import { useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useRecipe } from "@/hooks/queries/useRecipes";
 import { useRatings } from "@/hooks/queries/useRatings";
+import { useDeleteRecipe } from "@/hooks/mutations/useRecipeMutations";
+import { useCreateRating, useDeleteRating } from "@/hooks/mutations/useRatingMutations";
+import { useAuthStore } from "@/stores/auth";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Badge, DifficultyBadge, CategoryBadge } from "@/components/ui/Badge";
-import { Rating } from "@/components/ui/Rating";
+import { Rating, InteractiveRating } from "@/components/ui/Rating";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Alert } from "@/components/ui/Alert";
-import { Clock, DollarSign, Users, ChefHat, ArrowLeft, CheckCircle2, Circle } from "lucide-react";
+import { Modal } from "@/components/ui/Modal";
+import {
+  Clock,
+  DollarSign,
+  Users,
+  ChefHat,
+  ArrowLeft,
+  CheckCircle2,
+  Circle,
+  Pencil,
+  Trash2,
+} from "lucide-react";
 
 export default function RecipeDetailPage() {
   const { id } = useParams<{ id: string }>();
   const recipeId = Number(id);
+  const navigate = useNavigate();
 
+  const { isAuthenticated, user } = useAuthStore();
   const { data: recipe, isLoading, isError, refetch } = useRecipe(recipeId);
-  const { data: ratingsData } = useRatings(recipeId, { page: 1, perPage: 5 });
+  const { data: ratingsData } = useRatings(recipeId, { page: 1, perPage: 10 });
+
+  // Delete recipe state
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const deleteMutation = useDeleteRecipe({
+    onSuccess: () => navigate("/recipes"),
+  });
+
+  // Rating form state
+  const [ratingScore, setRatingScore] = useState(0);
+  const [ratingReview, setRatingReview] = useState("");
+  const [ratingError, setRatingError] = useState<string | null>(null);
+
+  const createRatingMutation = useCreateRating(recipeId, {
+    onSuccess: () => {
+      setRatingScore(0);
+      setRatingReview("");
+      setRatingError(null);
+    },
+    onError: (error) => {
+      setRatingError(error.message);
+    },
+  });
+
+  const deleteRatingMutation = useDeleteRating(recipeId);
+
+  // Check if current user already rated
+  const userRating = ratingsData?.data.find((r) => r.user.id === user?.id);
 
   if (isLoading) {
     return (
@@ -43,13 +87,35 @@ export default function RecipeDetailPage() {
   return (
     <div className="space-y-6">
       {/* Back Navigation */}
-      <Link
-        to="/recipes"
-        className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition-colors"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back to recipes
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link
+          to="/recipes"
+          className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to recipes
+        </Link>
+
+        {/* Edit / Delete buttons */}
+        {isAuthenticated && (
+          <div className="flex items-center gap-2">
+            <Link to={`/recipes/${recipeId}/edit`}>
+              <Button variant="outline" size="sm">
+                <Pencil className="h-4 w-4 mr-1" />
+                Edit
+              </Button>
+            </Link>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => setShowDeleteModal(true)}
+            >
+              <Trash2 className="h-4 w-4 mr-1" />
+              Delete
+            </Button>
+          </div>
+        )}
+      </div>
 
       {/* Recipe Header */}
       <div className="flex flex-col md:flex-row gap-6">
@@ -181,7 +247,95 @@ export default function RecipeDetailPage() {
         </Card>
       </div>
 
-      {/* Ratings Section */}
+      {/* Rate this recipe */}
+      <Card>
+        <CardHeader
+          title="Rate this Recipe"
+          description={
+            isAuthenticated
+              ? userRating
+                ? "You have already rated this recipe"
+                : "Share your experience"
+              : "Log in to rate this recipe"
+          }
+        />
+        <CardBody>
+          {!isAuthenticated ? (
+            <div className="text-center py-4">
+              <p className="text-gray-500 mb-3">Sign in to leave a rating and review.</p>
+              <Link to="/login">
+                <Button variant="primary" size="sm">
+                  Login to Rate
+                </Button>
+              </Link>
+            </div>
+          ) : userRating ? (
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <Rating value={userRating.score} size="md" showValue />
+                <span className="text-sm text-gray-500">Your rating</span>
+              </div>
+              {userRating.review && (
+                <p className="text-sm text-gray-600">{userRating.review}</p>
+              )}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => deleteRatingMutation.mutate(userRating.id)}
+                isLoading={deleteRatingMutation.isPending}
+              >
+                <Trash2 className="h-4 w-4 mr-1" />
+                Remove my rating
+              </Button>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {ratingError && (
+                <Alert variant="error" dismissible onDismiss={() => setRatingError(null)}>
+                  {ratingError}
+                </Alert>
+              )}
+              <div>
+                <label className="text-sm font-medium text-gray-700 block mb-2">
+                  Your Rating
+                </label>
+                <InteractiveRating
+                  value={ratingScore}
+                  onChange={setRatingScore}
+                  size="lg"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-gray-700 block mb-1.5">
+                  Review (optional)
+                </label>
+                <textarea
+                  className="block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:border-orange-500 focus:ring-orange-500/20 transition-colors duration-200"
+                  value={ratingReview}
+                  onChange={(e) => setRatingReview(e.target.value)}
+                  rows={3}
+                  placeholder="What did you think of this recipe?"
+                />
+              </div>
+              <Button
+                onClick={() =>
+                  createRatingMutation.mutate({
+                    score: ratingScore,
+                    review: ratingReview.trim() || undefined,
+                  })
+                }
+                disabled={ratingScore === 0}
+                isLoading={createRatingMutation.isPending}
+                size="sm"
+              >
+                Submit Rating
+              </Button>
+            </div>
+          )}
+        </CardBody>
+      </Card>
+
+      {/* Reviews Section */}
       {ratingsData && ratingsData.data.length > 0 && (
         <Card>
           <CardHeader title="Reviews" description={`${ratingsData.meta.totalCount} reviews`} />
@@ -206,6 +360,32 @@ export default function RecipeDetailPage() {
           </CardBody>
         </Card>
       )}
+
+      {/* Delete Confirmation Modal */}
+      <Modal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        title="Delete Recipe"
+        description="Are you sure you want to delete this recipe? This action cannot be undone."
+        footer={
+          <div className="flex justify-end gap-3">
+            <Button
+              variant="outline"
+              onClick={() => setShowDeleteModal(false)}
+              disabled={deleteMutation.isPending}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={() => deleteMutation.mutate(recipeId)}
+              isLoading={deleteMutation.isPending}
+            >
+              Delete
+            </Button>
+          </div>
+        }
+      />
     </div>
   );
 }

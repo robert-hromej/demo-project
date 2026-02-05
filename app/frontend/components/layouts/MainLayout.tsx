@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/stores/auth";
 import { useLogout } from "@/hooks/mutations/useAuth";
 import { Button } from "@/components/ui/Button";
-import { ChefHat, Search, DollarSign, Menu, X, User, LogOut } from "lucide-react";
+import { ChefHat, Search, DollarSign, Menu, X, User, LogOut, PlusCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface MainLayoutProps {
@@ -75,6 +75,12 @@ export function MainLayout({ children }: MainLayoutProps) {
             <div className="hidden md:flex md:items-center md:gap-3">
               {isAuthenticated ? (
                 <>
+                  <Link to="/recipes/new">
+                    <Button variant="primary" size="sm">
+                      <PlusCircle className="h-4 w-4 mr-1" />
+                      New Recipe
+                    </Button>
+                  </Link>
                   <span className="text-sm text-gray-600">
                     <User className="inline-block h-4 w-4 mr-1" />
                     {user?.name || user?.email}
@@ -143,6 +149,14 @@ export function MainLayout({ children }: MainLayoutProps) {
                 <div className="mt-4 pt-4 border-t border-gray-200">
                   {isAuthenticated ? (
                     <>
+                      <Link
+                        to="/recipes/new"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-orange-600 hover:bg-orange-50"
+                      >
+                        <PlusCircle className="h-5 w-5" />
+                        New Recipe
+                      </Link>
                       <div className="px-3 py-2 text-sm text-gray-600">
                         <User className="inline-block h-4 w-4 mr-1" />
                         {user?.name || user?.email}
