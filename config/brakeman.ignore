@@ -1,0 +1,14 @@
+{
+  "ignored_warnings": [
+    {
+      "fingerprint": "5dc66031de579cfca1ffb471a1bb17dd4361ec8c2fce0541d0941a520e7b88b9",
+      "note": "Sort order is validated by dry-validation contract (only 'asc'/'desc' allowed)"
+    },
+    {
+      "fingerprint": "9b2ad5bacb7f97755037df487201b5bccf1448f966148dd5c926f8ac3c6d726f",
+      "note": "Ingredient IDs are cast with Integer() to prevent SQL injection"
+    }
+  ],
+  "updated": "2026-02-05",
+  "brakeman_version": "8.0.2"
+}
