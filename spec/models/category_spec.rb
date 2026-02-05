@@ -40,13 +40,13 @@ RSpec.describe Category do
       end
     end
 
-    describe "default_scope" do
+    describe ".ordered" do
       let!(:category_b) { create(:category, name: "B", position: 2) }
       let!(:category_a) { create(:category, name: "A", position: 1) }
       let!(:category_c) { create(:category, name: "C", position: 3) }
 
       it "orders by position" do
-        expect(described_class.all.to_a).to eq([category_a, category_b, category_c])
+        expect(described_class.ordered.to_a).to eq([category_a, category_b, category_c])
       end
     end
   end

@@ -10,7 +10,7 @@ module Api
       expose :position
       expose :recipes_count
       expose :children, using: CategoryEntity, if: ->(_cat, opts) { opts[:include_children] } do |cat, _opts|
-        cat.children
+        cat.children.ordered
       end
       expose :parent, if: ->(cat, opts) { opts[:include_parent] && cat.parent } do |cat, _opts|
         {

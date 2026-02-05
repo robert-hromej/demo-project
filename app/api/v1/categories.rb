@@ -9,7 +9,7 @@ module Api
           optional :include_children, type: Boolean, default: false
         end
         get do
-          categories = Category.roots
+          categories = Category.roots.ordered
           present categories, with: Entities::CategoryEntity, include_children: params[:include_children]
         end
 

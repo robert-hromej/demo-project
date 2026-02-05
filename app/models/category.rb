@@ -7,7 +7,6 @@ class Category < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 100 }
 
-  default_scope { order(:position) }
-
+  scope :ordered, -> { order(:position) }
   scope :roots, -> { where(ancestry: nil) }
 end
