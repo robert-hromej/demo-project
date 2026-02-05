@@ -29,14 +29,22 @@ module Recipes
         base_scope = base_scope.where(recipe_ingredients: { optional: false })
       end
 
-      # Calculate match percentage
+      # Calculate match percentage using sanitized SQL
+      sanitized_ids = ingredient_ids.map { |id| Integer(id) }.join(",")
+
       matched_sql = <<~SQL.squish
-        COUNT(DISTINCT CASE WHEN recipe_ingredients.ingredient_id IN (#{ingredient_ids.join(",")})
+        COUNT(DISTINCT CASE WHEN recipe_ingredients.ingredient_id IN (#{sanitized_ids})
         THEN recipe_ingredients.ingredient_id END) AS matched_ingredients
       SQL
 
+      match_pct_sql = <<~SQL.squish
+        ROUND(COUNT(DISTINCT CASE WHEN recipe_ingredients.ingredient_id IN (#{sanitized_ids})
+        THEN recipe_ingredients.ingredient_id END)::numeric /
+        COUNT(DISTINCT recipe_ingredients.ingredient_id) * 100, 2) AS match_percentage
+      SQL
+
       min_match_sql = <<~SQL.squish
-        ROUND(COUNT(DISTINCT CASE WHEN recipe_ingredients.ingredient_id IN (?)
+        ROUND(COUNT(DISTINCT CASE WHEN recipe_ingredients.ingredient_id IN (#{sanitized_ids})
         THEN recipe_ingredients.ingredient_id END)::numeric /
         COUNT(DISTINCT recipe_ingredients.ingredient_id) * 100, 2) >= ?
       SQL
@@ -46,10 +54,10 @@ module Recipes
           "recipes.*",
           "COUNT(DISTINCT recipe_ingredients.ingredient_id) AS total_ingredients",
           matched_sql,
-          sanitized_match_percentage_sql(ingredient_ids: ingredient_ids),
+          match_pct_sql,
         )
         .having("COUNT(DISTINCT recipe_ingredients.ingredient_id) > 0")
-        .having(min_match_sql, ingredient_ids, min_match_percentage)
+        .having(min_match_sql, min_match_percentage)
 
       # Apply category filter
       query = query.where(category_id: params[:category_id]) if params[:category_id]
@@ -63,13 +71,6 @@ module Recipes
       Success(query)
     rescue StandardError => error
       Failure(code: :search_error, message: error.message)
-    end
-
-    def sanitized_match_percentage_sql(ingredient_ids:)
-      ids_sql = ingredient_ids.join(",")
-      "ROUND(COUNT(DISTINCT CASE WHEN recipe_ingredients.ingredient_id IN (#{ids_sql}) " \
-        "THEN recipe_ingredients.ingredient_id END)::numeric / " \
-        "COUNT(DISTINCT recipe_ingredients.ingredient_id) * 100, 2) AS match_percentage"
     end
 
     def paginate_results(scope:, params:)

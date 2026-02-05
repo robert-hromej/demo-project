@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { SearchX, FolderOpen, FileQuestion, Inbox } from "lucide-react";
 
+
 export type EmptyStateVariant = "search" | "empty" | "notFound" | "default";
 
 export interface EmptyStateProps extends HTMLAttributes<HTMLDivElement> {
@@ -81,74 +82,3 @@ export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(
 );
 
 EmptyState.displayName = "EmptyState";
-
-// Convenience components for common empty states
-export interface SearchEmptyStateProps extends Omit<EmptyStateProps, "variant" | "title"> {
-  searchTerm?: string;
-  onClearSearch?: () => void;
-}
-
-export const SearchEmptyState = forwardRef<HTMLDivElement, SearchEmptyStateProps>(
-  ({ searchTerm, onClearSearch, ...props }, ref) => {
-    return (
-      <EmptyState
-        ref={ref}
-        variant="search"
-        title="No results found"
-        description={
-          searchTerm
-            ? `We couldn't find any results for "${searchTerm}". Try adjusting your search or filters.`
-            : "Try adjusting your search or filters to find what you're looking for."
-        }
-        action={onClearSearch ? { label: "Clear search", onClick: onClearSearch } : undefined}
-        {...props}
-      />
-    );
-  }
-);
-
-SearchEmptyState.displayName = "SearchEmptyState";
-
-export interface RecipeEmptyStateProps extends Omit<EmptyStateProps, "variant" | "title"> {
-  onBrowseRecipes?: () => void;
-}
-
-export const RecipeEmptyState = forwardRef<HTMLDivElement, RecipeEmptyStateProps>(
-  ({ onBrowseRecipes, ...props }, ref) => {
-    return (
-      <EmptyState
-        ref={ref}
-        variant="empty"
-        title="No recipes yet"
-        description="You haven't saved any recipes yet. Browse our collection to find something delicious!"
-        action={onBrowseRecipes ? { label: "Browse recipes", onClick: onBrowseRecipes } : undefined}
-        {...props}
-      />
-    );
-  }
-);
-
-RecipeEmptyState.displayName = "RecipeEmptyState";
-
-export interface FavoritesEmptyStateProps extends Omit<EmptyStateProps, "variant" | "title"> {
-  onBrowseRecipes?: () => void;
-}
-
-export const FavoritesEmptyState = forwardRef<HTMLDivElement, FavoritesEmptyStateProps>(
-  ({ onBrowseRecipes, ...props }, ref) => {
-    return (
-      <EmptyState
-        ref={ref}
-        variant="empty"
-        title="No favorites yet"
-        description="Start adding recipes to your favorites to quickly access them later."
-        action={
-          onBrowseRecipes ? { label: "Discover recipes", onClick: onBrowseRecipes } : undefined
-        }
-        {...props}
-      />
-    );
-  }
-);
-
-FavoritesEmptyState.displayName = "FavoritesEmptyState";

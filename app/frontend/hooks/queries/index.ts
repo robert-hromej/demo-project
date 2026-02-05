@@ -1,12 +1,7 @@
 // Query hooks barrel export
-export { useCategories, useCategoriesList, useCategory } from "./useCategories";
+export { useCategoriesList } from "./useCategories";
 
-export {
-  useIngredients,
-  useIngredientsSearch,
-  useIngredient,
-  useIngredientsByIds,
-} from "./useIngredients";
+export { useIngredientsSearch } from "./useIngredients";
 
 export { useRecipes, useRecipesSearch, useRecipe } from "./useRecipes";
 

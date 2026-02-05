@@ -77,6 +77,8 @@ module Recipes
         scope.order(est_cost_cents: sort_order)
       when "time"
         scope.order(Arel.sql("prep_time_min + cook_time_min #{sort_order.upcase}"))
+      when "created_at"
+        scope.order(created_at: sort_order)
       else
         scope.order(avg_rating: :desc)
       end

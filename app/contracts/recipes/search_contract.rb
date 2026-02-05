@@ -3,7 +3,7 @@
 module Recipes
   class SearchContract < ApplicationContract
     DIFFICULTIES = ["easy", "medium", "hard"].freeze
-    SORT_FIELDS = ["rating", "cost", "time"].freeze
+    SORT_FIELDS = ["rating", "cost", "time", "created_at"].freeze
 
     params do
       optional(:query).maybe(:string)

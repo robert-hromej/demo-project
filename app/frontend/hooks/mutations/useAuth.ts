@@ -24,9 +24,6 @@ export function useRegister(options?: UseAuthOptions) {
       return apiClient.post<AuthResponse>("/auth/register", { user: body });
     },
     onSuccess: (data) => {
-      // Store token in localStorage
-      localStorage.setItem("auth_token", data.token);
-
       // Update user cache
       queryClient.setQueryData(["auth", "user"], data.user);
 
@@ -49,9 +46,6 @@ export function useLogin(options?: UseAuthOptions) {
       });
     },
     onSuccess: (data) => {
-      // Store token in localStorage
-      localStorage.setItem("auth_token", data.token);
-
       // Update user cache
       queryClient.setQueryData(["auth", "user"], data.user);
 
@@ -76,9 +70,6 @@ export function useLogout(options?: { onSuccess?: () => void }) {
       }
     },
     onSuccess: () => {
-      // Clear token from localStorage
-      localStorage.removeItem("auth_token");
-
       // Clear user cache
       queryClient.setQueryData(["auth", "user"], null);
 

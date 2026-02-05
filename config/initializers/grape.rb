@@ -3,7 +3,7 @@
 # Grape API configuration
 # Exclude app/api from Zeitwerk: files use Api:: namespace which conflicts
 # with Zeitwerk expectations (app/api/ is an autoload root, so it expects no Api:: prefix).
-Rails.autoloaders.main.ignore(Rails.root.join("app/api"))
+Rails.autoloaders.main.ignore(Rails.root.join("app", "api"))
 
 # Explicitly require all API files in proper order:
 # helpers first, then base classes, then entities, then endpoints

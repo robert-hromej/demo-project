@@ -29,14 +29,6 @@ RSpec.describe Recipe do
   end
 
   describe "scopes" do
-    describe ".published" do
-      let!(:published_recipe) { create(:recipe, title: "Published Recipe") }
-
-      it "returns recipes with title" do
-        expect(described_class.published).to include(published_recipe)
-      end
-    end
-
     describe ".by_difficulty" do
       let!(:easy_recipe) { create(:recipe, difficulty: :easy) }
       let!(:medium_recipe) { create(:recipe, difficulty: :medium) }
@@ -63,24 +55,6 @@ RSpec.describe Recipe do
       it "returns recipes within budget" do
         expect(described_class.within_budget(3000)).to include(cheap_recipe)
         expect(described_class.within_budget(3000)).not_to include(expensive_recipe)
-      end
-    end
-
-    describe ".by_rating" do
-      let!(:low_rated) { create(:recipe, avg_rating: 2.0) }
-      let!(:high_rated) { create(:recipe, avg_rating: 5.0) }
-
-      it "orders by average rating descending" do
-        expect(described_class.by_rating.first).to eq(high_rated)
-      end
-    end
-
-    describe ".by_cost" do
-      let!(:expensive_recipe) { create(:recipe, :expensive) }
-      let!(:cheap_recipe) { create(:recipe, :cheap) }
-
-      it "orders by cost ascending" do
-        expect(described_class.by_cost.first).to eq(cheap_recipe)
       end
     end
   end

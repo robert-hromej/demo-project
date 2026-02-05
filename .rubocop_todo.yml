@@ -14,6 +14,12 @@ Layout/LineLength:
   Max: 169
 
 # Offense count: 1
+# Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes.
+Metrics/AbcSize:
+  Exclude:
+    - 'app/services/recipes/search_by_ingredients.rb'
+
+# Offense count: 1
 # Configuration parameters: CountComments, Max, CountAsOne, AllowedMethods, AllowedPatterns.
 Metrics/MethodLength:
   Exclude:
@@ -46,10 +52,3 @@ RSpec/MultipleMemoizedHelpers:
 Style/ComparableClamp:
   Exclude:
     - 'app/api/helpers/api_helpers.rb'
-
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowHeredoc, AllowURI, AllowQualifiedName, URISchemes, AllowRBSInlineAnnotation, AllowCopDirectives, AllowedPatterns, SplitStrings.
-# URISchemes: http, https
-Layout/LineLength:
-  Max: 169

@@ -15,11 +15,8 @@ class Recipe < ApplicationRecord
   validates :servings, numericality: { greater_than: 0 }
   validates :est_cost_cents, numericality: { greater_than_or_equal_to: 0 }
 
-  scope :published, -> { where.not(title: nil) }
   scope :by_difficulty, ->(diff) { where(difficulty: diff) }
   scope :within_budget, ->(cents) { where(est_cost_cents: ..cents) }
-  scope :by_rating, -> { order(avg_rating: :desc) }
-  scope :by_cost, -> { order(:est_cost_cents) }
 
   def total_time_min
     prep_time_min + cook_time_min

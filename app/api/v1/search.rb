@@ -21,13 +21,23 @@ module Api
           result = ::Recipes::SearchByIngredients.call(params: declared(params))
           data = handle_result(result)
 
-          # Get missing ingredients for each recipe
+          # Preload required ingredient IDs for all recipes in one query
+          recipe_ids = data[:recipes].map { |item| item[:recipe].id }
+          matched_ids = params[:ingredient_ids]
+
+          required_ingredients_map = RecipeIngredient
+            .where(recipe_id: recipe_ids, optional: false)
+            .pluck(:recipe_id, :ingredient_id)
+            .group_by(&:first)
+            .transform_values { |pairs| pairs.map(&:last) }
+
+          all_missing_ids = required_ingredients_map.values.flatten.uniq - matched_ids
+          missing_ingredients_map = Ingredient.where(id: all_missing_ids).index_by(&:id)
+
           recipes_with_missing = data[:recipes].map do |item|
             recipe = item[:recipe]
-            matched_ids = params[:ingredient_ids]
-            required_ids = recipe.recipe_ingredients.where(optional: false).pluck(:ingredient_id)
-            missing_ids = required_ids - matched_ids
-            missing = Ingredient.where(id: missing_ids)
+            required_ids = required_ingredients_map[recipe.id] || []
+            missing = (required_ids - matched_ids).filter_map { |id| missing_ingredients_map[id] }
 
             {
               recipe: recipe,

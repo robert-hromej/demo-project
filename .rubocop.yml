@@ -83,6 +83,7 @@ Metrics/MethodLength:
   Exclude:
     - "spec/**/*"
     - "db/migrate/*.rb"
+    - "app/services/recipes/search_by_ingredients.rb"
 
 Metrics/BlockLength:
   Max: 25
@@ -120,6 +121,7 @@ Metrics/AbcSize:
   Exclude:
     - "spec/**/*"
     - "db/migrate/*.rb"
+    - "app/services/recipes/search_by_ingredients.rb"
 
 Metrics/CyclomaticComplexity:
   Max: 10

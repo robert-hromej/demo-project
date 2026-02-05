@@ -46,8 +46,6 @@ RecipeMatch використовує сучасний Ruby on Rails API backend 
 |-----|-------------|
 | `grape` | DSL для REST API |
 | `grape-entity` | Серіалізація відповідей |
-| `grape-swagger` | Документація OpenAPI |
-| `grape-swagger-entity` | Підтримка Swagger entity |
 
 ### Бізнес-логіка (dry-rb)
 
@@ -61,7 +59,6 @@ RecipeMatch використовує сучасний Ruby on Rails API backend 
 | Gem | Призначення |
 |-----|-------------|
 | `vite_rails` | Інтеграція frontend bundler |
-| `pagy` | Пагінація |
 | `money-rails` | Робота з валютою/грошима (UAH) |
 | `jwt` | Автентифікація JSON Web Token |
 | `bcrypt` | Хешування паролів |
@@ -109,7 +106,7 @@ RecipeMatch використовує сучасний Ruby on Rails API backend 
 |------------|--------|-------------|
 | React | 19.x | UI бібліотека |
 | TypeScript | 5.x | Type-safe JavaScript |
-| Vite | 6.x | Інструмент збірки та dev server |
+| Vite | 5.4.x | Інструмент збірки та dev server |
 
 ### Стилізація
 
@@ -174,8 +171,7 @@ RecipeMatch використовує сучасний Ruby on Rails API backend 
 | Технологія | Призначення |
 |------------|-------------|
 | Docker | Контейнеризація |
-| Kamal | Оркестрація деплою |
-| Thruster | HTTP стиснення ресурсів |
+| Railway | Хмарний хостинг |
 
 ### CI/CD
 
