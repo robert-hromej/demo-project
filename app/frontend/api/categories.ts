@@ -1,9 +1,5 @@
 import { apiClient } from "./client";
-import type {
-  Category,
-  CreateCategoryRequest,
-  UpdateCategoryRequest,
-} from "../types";
+import type { Category, CreateCategoryRequest, UpdateCategoryRequest } from "../types";
 
 export interface ListCategoriesParams {
   includeChildren?: boolean;
@@ -12,9 +8,7 @@ export interface ListCategoriesParams {
 /**
  * List all root categories
  */
-export async function listCategories(
-  params?: ListCategoriesParams
-): Promise<Category[]> {
+export async function listCategories(params?: ListCategoriesParams): Promise<Category[]> {
   return apiClient.get<Category[]>("/categories", { params });
 }
 
@@ -28,19 +22,14 @@ export async function getCategory(id: number): Promise<Category> {
 /**
  * Create a new category (requires authentication)
  */
-export async function createCategory(
-  data: CreateCategoryRequest
-): Promise<Category> {
+export async function createCategory(data: CreateCategoryRequest): Promise<Category> {
   return apiClient.post<Category>("/categories", data);
 }
 
 /**
  * Update an existing category (requires authentication)
  */
-export async function updateCategory(
-  id: number,
-  data: UpdateCategoryRequest
-): Promise<Category> {
+export async function updateCategory(id: number, data: UpdateCategoryRequest): Promise<Category> {
   return apiClient.put<Category>(`/categories/${id}`, data);
 }
 

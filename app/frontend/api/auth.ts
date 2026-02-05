@@ -1,10 +1,5 @@
 import { apiClient, setToken, removeToken } from "./client";
-import type {
-  AuthResponse,
-  User,
-  RegisterRequest,
-  LoginRequest,
-} from "../types";
+import type { AuthResponse, User, RegisterRequest, LoginRequest } from "../types";
 
 /**
  * Register a new user

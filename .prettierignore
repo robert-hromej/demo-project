@@ -1,0 +1,10 @@
+node_modules
+public
+tmp
+vendor
+config
+db
+log
+storage
+app/assets
+*.md

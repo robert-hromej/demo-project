@@ -43,12 +43,7 @@ export {
   deleteRecipe,
 } from "./recipes";
 
-export {
-  ratingsApi,
-  listRatings,
-  createRating,
-  deleteRating,
-} from "./ratings";
+export { ratingsApi, listRatings, createRating, deleteRating } from "./ratings";
 export type { ListRatingsParams } from "./ratings";
 
 export { searchApi, searchByIngredients, searchByBudget } from "./search";

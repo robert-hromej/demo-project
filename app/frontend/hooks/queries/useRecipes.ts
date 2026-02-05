@@ -1,12 +1,7 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { apiClient } from "@/api/client";
 import { queryKeys } from "@/lib/query-client";
-import type {
-  Recipe,
-  ApiResponse,
-  PaginatedResponse,
-  RecipeSearchParams,
-} from "@/types";
+import type { Recipe, ApiResponse, PaginatedResponse, RecipeSearchParams } from "@/types";
 
 interface UseRecipesOptions {
   enabled?: boolean;
@@ -14,10 +9,7 @@ interface UseRecipesOptions {
 }
 
 // Fetch all recipes (paginated)
-export function useRecipes(
-  params?: RecipeSearchParams,
-  options?: UseRecipesOptions
-) {
+export function useRecipes(params?: RecipeSearchParams, options?: UseRecipesOptions) {
   return useQuery({
     queryKey: queryKeys.recipes.list(params),
     queryFn: async (): Promise<PaginatedResponse<Recipe>> => {
@@ -64,10 +56,7 @@ export function useRecipes(
 }
 
 // Search recipes with filters
-export function useRecipesSearch(
-  params: RecipeSearchParams,
-  options?: UseRecipesOptions
-) {
+export function useRecipesSearch(params: RecipeSearchParams, options?: UseRecipesOptions) {
   return useQuery({
     queryKey: queryKeys.recipes.search(params),
     queryFn: async (): Promise<PaginatedResponse<Recipe>> => {
@@ -115,16 +104,11 @@ export function useRecipesSearch(
 }
 
 // Fetch single recipe by ID
-export function useRecipe(
-  id: number,
-  options?: { enabled?: boolean }
-) {
+export function useRecipe(id: number, options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: queryKeys.recipes.detail(id),
     queryFn: async (): Promise<Recipe> => {
-      const response = await apiClient.get<ApiResponse<Recipe> | Recipe>(
-        `/recipes/${id}`
-      );
+      const response = await apiClient.get<ApiResponse<Recipe> | Recipe>(`/recipes/${id}`);
 
       // Handle both wrapped and unwrapped responses
       return "data" in response ? response.data : response;

@@ -93,8 +93,7 @@ export const queryKeys = {
   categories: {
     all: ["categories"] as const,
     lists: () => [...queryKeys.categories.all, "list"] as const,
-    list: (params?: object) =>
-      [...queryKeys.categories.lists(), params] as const,
+    list: (params?: object) => [...queryKeys.categories.lists(), params] as const,
     details: () => [...queryKeys.categories.all, "detail"] as const,
     detail: (id: number) => [...queryKeys.categories.details(), id] as const,
   },
@@ -103,10 +102,8 @@ export const queryKeys = {
   ingredients: {
     all: ["ingredients"] as const,
     lists: () => [...queryKeys.ingredients.all, "list"] as const,
-    list: (params?: object) =>
-      [...queryKeys.ingredients.lists(), params] as const,
-    search: (query: string) =>
-      [...queryKeys.ingredients.all, "search", query] as const,
+    list: (params?: object) => [...queryKeys.ingredients.lists(), params] as const,
+    search: (query: string) => [...queryKeys.ingredients.all, "search", query] as const,
     details: () => [...queryKeys.ingredients.all, "detail"] as const,
     detail: (id: number) => [...queryKeys.ingredients.details(), id] as const,
   },
@@ -115,10 +112,8 @@ export const queryKeys = {
   recipes: {
     all: ["recipes"] as const,
     lists: () => [...queryKeys.recipes.all, "list"] as const,
-    list: (params?: object) =>
-      [...queryKeys.recipes.lists(), params] as const,
-    search: (params?: object) =>
-      [...queryKeys.recipes.all, "search", params] as const,
+    list: (params?: object) => [...queryKeys.recipes.lists(), params] as const,
+    search: (params?: object) => [...queryKeys.recipes.all, "search", params] as const,
     details: () => [...queryKeys.recipes.all, "detail"] as const,
     detail: (id: number) => [...queryKeys.recipes.details(), id] as const,
   },
@@ -126,8 +121,7 @@ export const queryKeys = {
   // Ratings
   ratings: {
     all: ["ratings"] as const,
-    byRecipe: (recipeId: number) =>
-      [...queryKeys.ratings.all, "recipe", recipeId] as const,
+    byRecipe: (recipeId: number) => [...queryKeys.ratings.all, "recipe", recipeId] as const,
     byRecipeList: (recipeId: number, params?: object) =>
       [...queryKeys.ratings.byRecipe(recipeId), params] as const,
   },

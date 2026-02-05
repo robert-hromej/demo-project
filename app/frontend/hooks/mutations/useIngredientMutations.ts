@@ -46,10 +46,9 @@ export function useCreateIngredient(options?: UseMutationOptions<Ingredient>) {
     mutationFn: async (request: CreateIngredientRequest): Promise<Ingredient> => {
       const body = toSnakeCase(request);
 
-      const response = await apiClient.post<ApiResponse<Ingredient> | Ingredient>(
-        "/ingredients",
-        { ingredient: body }
-      );
+      const response = await apiClient.post<ApiResponse<Ingredient> | Ingredient>("/ingredients", {
+        ingredient: body,
+      });
 
       return "data" in response ? response.data : response;
     },

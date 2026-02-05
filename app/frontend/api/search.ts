@@ -13,19 +13,14 @@ import type {
 export async function searchByIngredients(
   data: SearchByIngredientsRequest
 ): Promise<SearchByIngredientsResponse> {
-  return apiClient.post<SearchByIngredientsResponse>(
-    "/search/by-ingredients",
-    data
-  );
+  return apiClient.post<SearchByIngredientsResponse>("/search/by-ingredients", data);
 }
 
 /**
  * Search recipes by budget
  * Returns recipes that fit within the specified budget
  */
-export async function searchByBudget(
-  data: SearchByBudgetRequest
-): Promise<SearchByBudgetResponse> {
+export async function searchByBudget(data: SearchByBudgetRequest): Promise<SearchByBudgetResponse> {
   return apiClient.post<SearchByBudgetResponse>("/search/by-budget", data);
 }
 

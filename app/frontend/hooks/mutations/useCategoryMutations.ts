@@ -1,12 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "@/api/client";
 import { queryKeys } from "@/lib/query-client";
-import type {
-  Category,
-  ApiResponse,
-  CreateCategoryRequest,
-  UpdateCategoryRequest,
-} from "@/types";
+import type { Category, ApiResponse, CreateCategoryRequest, UpdateCategoryRequest } from "@/types";
 
 interface UseMutationOptions<T> {
   onSuccess?: (data: T) => void;
@@ -43,10 +38,9 @@ export function useCreateCategory(options?: UseMutationOptions<Category>) {
     mutationFn: async (request: CreateCategoryRequest): Promise<Category> => {
       const body = toSnakeCase(request);
 
-      const response = await apiClient.post<ApiResponse<Category> | Category>(
-        "/categories",
-        { category: body }
-      );
+      const response = await apiClient.post<ApiResponse<Category> | Category>("/categories", {
+        category: body,
+      });
 
       return "data" in response ? response.data : response;
     },

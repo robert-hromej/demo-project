@@ -30,9 +30,7 @@ export default function LoginPage() {
       login({ user: response.user, token: response.token });
       navigate(from, { replace: true });
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Invalid email or password"
-      );
+      setError(err instanceof Error ? err.message : "Invalid email or password");
     } finally {
       setIsLoading(false);
     }
@@ -46,9 +44,7 @@ export default function LoginPage() {
             <ChefHat className="h-10 w-10" />
             <span className="text-2xl font-bold text-gray-900">RecipeMatch</span>
           </Link>
-          <h1 className="mt-6 text-2xl font-bold text-gray-900">
-            Sign in to your account
-          </h1>
+          <h1 className="mt-6 text-2xl font-bold text-gray-900">Sign in to your account</h1>
           <p className="mt-2 text-gray-600">
             Don&apos;t have an account?{" "}
             <Link to="/register" className="text-orange-600 hover:text-orange-500 font-medium">
@@ -86,11 +82,7 @@ export default function LoginPage() {
                 autoComplete="current-password"
               />
 
-              <Button
-                type="submit"
-                fullWidth
-                isLoading={isLoading}
-              >
+              <Button type="submit" fullWidth isLoading={isLoading}>
                 Sign in
               </Button>
             </form>

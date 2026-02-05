@@ -38,9 +38,7 @@ export async function getIngredient(id: number): Promise<Ingredient> {
 /**
  * Create a new ingredient (requires authentication)
  */
-export async function createIngredient(
-  data: CreateIngredientRequest
-): Promise<Ingredient> {
+export async function createIngredient(data: CreateIngredientRequest): Promise<Ingredient> {
   return apiClient.post<Ingredient>("/ingredients", data);
 }
 

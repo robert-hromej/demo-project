@@ -32,10 +32,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={cn("flex flex-col gap-1.5", fullWidth && "w-full")}>
         {label && (
-          <label
-            htmlFor={inputId}
-            className="text-sm font-medium text-gray-700"
-          >
+          <label htmlFor={inputId} className="text-sm font-medium text-gray-700">
             {label}
           </label>
         )}
@@ -63,9 +60,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             )}
             disabled={disabled}
             aria-invalid={hasError}
-            aria-describedby={
-              hasError ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined
-            }
+            aria-describedby={hasError ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}
             {...props}
           />
           {rightIcon && (

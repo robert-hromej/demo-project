@@ -31,13 +31,9 @@ export function useRatings(
         queryParams.per_page = String(params.perPage);
       }
 
-      return apiClient.get<RatingsListResponse>(
-        `/recipes/${recipeId}/ratings`,
-        {
-          params:
-            Object.keys(queryParams).length > 0 ? queryParams : undefined,
-        }
-      );
+      return apiClient.get<RatingsListResponse>(`/recipes/${recipeId}/ratings`, {
+        params: Object.keys(queryParams).length > 0 ? queryParams : undefined,
+      });
     },
     enabled: options?.enabled !== false && recipeId > 0,
     placeholderData: options?.keepPreviousData ? keepPreviousData : undefined,

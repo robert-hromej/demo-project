@@ -25,8 +25,4 @@ export {
 
 // Re-export types
 export type { User } from "./auth";
-export type {
-  Ingredient,
-  RecipeWithIngredientMatch,
-  RecipeWithBudgetInfo,
-} from "./search";
+export type { Ingredient, RecipeWithIngredientMatch, RecipeWithBudgetInfo } from "./search";

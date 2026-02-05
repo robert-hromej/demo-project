@@ -35,17 +35,7 @@ const sizeStyles: Record<BadgeSize, string> = {
 };
 
 export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  (
-    {
-      className,
-      variant = "default",
-      size = "md",
-      rounded = false,
-      children,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, variant = "default", size = "md", rounded = false, children, ...props }, ref) => {
     return (
       <span
         ref={ref}

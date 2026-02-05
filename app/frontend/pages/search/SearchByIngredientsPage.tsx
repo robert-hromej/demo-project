@@ -10,15 +10,7 @@ import { Badge, DifficultyBadge } from "@/components/ui/Badge";
 import { Rating } from "@/components/ui/Rating";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Alert } from "@/components/ui/Alert";
-import {
-  Search,
-  X,
-  Plus,
-  Clock,
-  DollarSign,
-  ChefHat,
-  Percent,
-} from "lucide-react";
+import { Search, X, Plus, Clock, DollarSign, ChefHat, Percent } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Ingredient, RecipeWithIngredientMatch } from "@/types";
 
@@ -66,9 +58,7 @@ export default function SearchByIngredientsPage() {
       setResults(response.data);
       setHasSearched(true);
     } catch (err) {
-      setSearchError(
-        err instanceof Error ? err.message : "Search failed. Please try again."
-      );
+      setSearchError(err instanceof Error ? err.message : "Search failed. Please try again.");
     } finally {
       setIsSearching(false);
     }
@@ -78,12 +68,9 @@ export default function SearchByIngredientsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-          Search by Ingredients
-        </h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Search by Ingredients</h1>
         <p className="text-gray-600 mt-1">
-          Enter the ingredients you have, and we&apos;ll find recipes you can
-          make
+          Enter the ingredients you have, and we&apos;ll find recipes you can make
         </p>
       </div>
 
@@ -111,10 +98,7 @@ export default function SearchByIngredientsPage() {
                       </div>
                     ) : searchResults && searchResults.length > 0 ? (
                       searchResults
-                        .filter(
-                          (i) =>
-                            !selectedIngredients.some((s) => s.id === i.id)
-                        )
+                        .filter((i) => !selectedIngredients.some((s) => s.id === i.id))
                         .map((ingredient) => (
                           <button
                             key={ingredient.id}
@@ -122,16 +106,12 @@ export default function SearchByIngredientsPage() {
                             className="w-full text-left px-4 py-2 hover:bg-gray-50 flex items-center justify-between transition-colors"
                             onClick={() => handleAddIngredient(ingredient)}
                           >
-                            <span className="text-sm text-gray-900">
-                              {ingredient.name}
-                            </span>
+                            <span className="text-sm text-gray-900">{ingredient.name}</span>
                             <Plus className="h-4 w-4 text-gray-400" />
                           </button>
                         ))
                     ) : (
-                      <p className="p-3 text-sm text-gray-500 text-center">
-                        No ingredients found
-                      </p>
+                      <p className="p-3 text-sm text-gray-500 text-center">No ingredients found</p>
                     )}
                   </div>
                 )}
@@ -145,9 +125,7 @@ export default function SearchByIngredientsPage() {
                       key={ingredient.id}
                       className="flex items-center justify-between py-1.5 px-2 bg-orange-50 rounded-lg"
                     >
-                      <span className="text-sm font-medium text-gray-900">
-                        {ingredient.name}
-                      </span>
+                      <span className="text-sm font-medium text-gray-900">{ingredient.name}</span>
                       <button
                         type="button"
                         onClick={() => removeIngredient(ingredient.id)}
@@ -190,9 +168,7 @@ export default function SearchByIngredientsPage() {
                     max="100"
                     step="10"
                     value={matchPercentage}
-                    onChange={(e) =>
-                      setMatchPercentage(Number(e.target.value))
-                    }
+                    onChange={(e) => setMatchPercentage(Number(e.target.value))}
                     className="w-full mt-2 accent-orange-500"
                   />
                   <div className="flex justify-between text-xs text-gray-500">
@@ -208,9 +184,7 @@ export default function SearchByIngredientsPage() {
                     onChange={(e) => setIncludeOptional(e.target.checked)}
                     className="rounded border-gray-300 text-orange-500 focus:ring-orange-500"
                   />
-                  <span className="text-sm text-gray-700">
-                    Include optional ingredients
-                  </span>
+                  <span className="text-sm text-gray-700">Include optional ingredients</span>
                 </label>
               </div>
             </CardBody>
@@ -245,9 +219,7 @@ export default function SearchByIngredientsPage() {
             <Card className="text-center py-12">
               <CardBody>
                 <ChefHat className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
-                  No recipes found
-                </h3>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No recipes found</h3>
                 <p className="text-gray-600">
                   Try adding more ingredients or lowering the match percentage
                 </p>
@@ -257,9 +229,7 @@ export default function SearchByIngredientsPage() {
 
           {!isSearching && results.length > 0 && (
             <div className="space-y-4">
-              <p className="text-sm text-gray-600">
-                Found {results.length} recipes
-              </p>
+              <p className="text-sm text-gray-600">Found {results.length} recipes</p>
 
               {results.map((result) => (
                 <Link key={result.id} to={`/recipes/${result.id}`}>
@@ -284,9 +254,7 @@ export default function SearchByIngredientsPage() {
                         {/* Info */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-semibold text-gray-900 truncate">
-                              {result.title}
-                            </h3>
+                            <h3 className="font-semibold text-gray-900 truncate">{result.title}</h3>
                             <DifficultyBadge difficulty={result.difficulty} />
                           </div>
 
@@ -348,8 +316,8 @@ export default function SearchByIngredientsPage() {
                   What&apos;s in your kitchen?
                 </h3>
                 <p className="text-gray-600 max-w-md mx-auto">
-                  Add the ingredients you have on hand, and we&apos;ll find
-                  recipes you can make right now.
+                  Add the ingredients you have on hand, and we&apos;ll find recipes you can make
+                  right now.
                 </p>
               </CardBody>
             </Card>

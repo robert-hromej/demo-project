@@ -24,15 +24,7 @@ const textSizes = {
 
 export const Rating = forwardRef<HTMLDivElement, RatingProps>(
   (
-    {
-      className,
-      value,
-      maxValue = 5,
-      size = "md",
-      showValue = false,
-      reviewCount,
-      ...props
-    },
+    { className, value, maxValue = 5, size = "md", showValue = false, reviewCount, ...props },
     ref
   ) => {
     const clampedValue = Math.min(Math.max(0, value), maxValue);
@@ -60,15 +52,9 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
           {/* Half star */}
           {hasHalfStar && (
             <div className="relative">
-              <Star
-                className={cn(sizeStyles[size], "text-gray-300")}
-                aria-hidden="true"
-              />
+              <Star className={cn(sizeStyles[size], "text-gray-300")} aria-hidden="true" />
               <StarHalf
-                className={cn(
-                  sizeStyles[size],
-                  "absolute inset-0 fill-yellow-400 text-yellow-400"
-                )}
+                className={cn(sizeStyles[size], "absolute inset-0 fill-yellow-400 text-yellow-400")}
                 aria-hidden="true"
               />
             </div>
@@ -86,9 +72,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
 
         {(showValue || reviewCount !== undefined) && (
           <span className={cn("text-gray-600", textSizes[size])}>
-            {showValue && (
-              <span className="font-medium">{clampedValue.toFixed(1)}</span>
-            )}
+            {showValue && <span className="font-medium">{clampedValue.toFixed(1)}</span>}
             {reviewCount !== undefined && (
               <span className="text-gray-400">
                 {showValue && " "}({reviewCount})
@@ -104,8 +88,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
 Rating.displayName = "Rating";
 
 // Interactive rating component for user input
-export interface InteractiveRatingProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface InteractiveRatingProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
   value: number;
   onChange: (value: number) => void;
   maxValue?: number;
@@ -114,18 +97,7 @@ export interface InteractiveRatingProps
 }
 
 export const InteractiveRating = forwardRef<HTMLDivElement, InteractiveRatingProps>(
-  (
-    {
-      className,
-      value,
-      onChange,
-      maxValue = 5,
-      size = "md",
-      disabled = false,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, value, onChange, maxValue = 5, size = "md", disabled = false, ...props }, ref) => {
     const [hoverValue, setHoverValue] = React.useState<number | null>(null);
 
     const displayValue = hoverValue ?? value;
@@ -149,10 +121,7 @@ export const InteractiveRating = forwardRef<HTMLDivElement, InteractiveRatingPro
             <button
               key={index}
               type="button"
-              className={cn(
-                "transition-colors",
-                !disabled && "cursor-pointer hover:scale-110"
-              )}
+              className={cn("transition-colors", !disabled && "cursor-pointer hover:scale-110")}
               onClick={() => !disabled && onChange(starValue)}
               onMouseEnter={() => !disabled && setHoverValue(starValue)}
               disabled={disabled}

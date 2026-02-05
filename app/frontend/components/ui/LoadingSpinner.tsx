@@ -29,10 +29,7 @@ const textSizes = {
 };
 
 export const LoadingSpinner = forwardRef<HTMLDivElement, LoadingSpinnerProps>(
-  (
-    { className, size = "md", color = "primary", label, ...props },
-    ref
-  ) => {
+  ({ className, size = "md", color = "primary", label, ...props }, ref) => {
     return (
       <div
         ref={ref}
@@ -45,9 +42,7 @@ export const LoadingSpinner = forwardRef<HTMLDivElement, LoadingSpinnerProps>(
           className={cn("animate-spin", sizeStyles[size], colorStyles[color])}
           aria-hidden="true"
         />
-        {label && (
-          <span className={cn("text-gray-600", textSizes[size])}>{label}</span>
-        )}
+        {label && <span className={cn("text-gray-600", textSizes[size])}>{label}</span>}
         <span className="sr-only">{label || "Loading..."}</span>
       </div>
     );
@@ -68,9 +63,7 @@ export const PageLoader = forwardRef<HTMLDivElement, PageLoaderProps>(
         ref={ref}
         className={cn(
           "flex items-center justify-center",
-          overlay
-            ? "fixed inset-0 z-50 bg-white/80 backdrop-blur-sm"
-            : "min-h-[200px] w-full"
+          overlay ? "fixed inset-0 z-50 bg-white/80 backdrop-blur-sm" : "min-h-[200px] w-full"
         )}
       >
         <LoadingSpinner size="xl" label={label} {...props} />
@@ -91,11 +84,7 @@ export const InlineLoader = forwardRef<HTMLSpanElement, InlineLoaderProps>(
     const iconSize = size === "sm" ? "h-3 w-3" : "h-4 w-4";
 
     return (
-      <span
-        ref={ref}
-        className={cn("inline-flex items-center gap-1", className)}
-        {...props}
-      >
+      <span ref={ref} className={cn("inline-flex items-center gap-1", className)} {...props}>
         <Loader2 className={cn("animate-spin text-gray-400", iconSize)} />
       </span>
     );

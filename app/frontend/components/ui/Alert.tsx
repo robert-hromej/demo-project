@@ -1,12 +1,6 @@
 import React, { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import {
-  AlertCircle,
-  CheckCircle2,
-  Info,
-  AlertTriangle,
-  X,
-} from "lucide-react";
+import { AlertCircle, CheckCircle2, Info, AlertTriangle, X } from "lucide-react";
 
 export type AlertVariant = "success" | "error" | "warning" | "info";
 
@@ -59,27 +53,15 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       <div
         ref={ref}
         role="alert"
-        className={cn(
-          "flex gap-3 rounded-lg border p-4",
-          variantStyles[variant],
-          className
-        )}
+        className={cn("flex gap-3 rounded-lg border p-4", variantStyles[variant], className)}
         {...props}
       >
         {displayIcon && (
-          <div className={cn("shrink-0", iconColorStyles[variant])}>
-            {displayIcon}
-          </div>
+          <div className={cn("shrink-0", iconColorStyles[variant])}>{displayIcon}</div>
         )}
         <div className="flex-1 min-w-0">
-          {title && (
-            <h5 className="font-medium mb-1">{title}</h5>
-          )}
-          {children && (
-            <div className={cn("text-sm", title ? "opacity-90" : "")}>
-              {children}
-            </div>
-          )}
+          {title && <h5 className="font-medium mb-1">{title}</h5>}
+          {children && <div className={cn("text-sm", title ? "opacity-90" : "")}>{children}</div>}
         </div>
         {dismissible && (
           <button
@@ -113,17 +95,7 @@ export interface ToastAlertProps extends AlertProps {
 }
 
 export const ToastAlert = forwardRef<HTMLDivElement, ToastAlertProps>(
-  (
-    {
-      show = true,
-      duration = 5000,
-      onHide,
-      dismissible = true,
-      onDismiss,
-      ...props
-    },
-    ref
-  ) => {
+  ({ show = true, duration = 5000, onHide, dismissible = true, onDismiss, ...props }, ref) => {
     React.useEffect(() => {
       if (show && duration > 0 && onHide) {
         const timer = setTimeout(onHide, duration);

@@ -1,12 +1,7 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { apiClient } from "@/api/client";
 import { queryKeys } from "@/lib/query-client";
-import type {
-  Ingredient,
-  ApiResponse,
-  PaginatedResponse,
-  IngredientSearchParams,
-} from "@/types";
+import type { Ingredient, ApiResponse, PaginatedResponse, IngredientSearchParams } from "@/types";
 
 interface UseIngredientsOptions {
   enabled?: boolean;
@@ -14,10 +9,7 @@ interface UseIngredientsOptions {
 }
 
 // Fetch all ingredients (paginated)
-export function useIngredients(
-  params?: IngredientSearchParams,
-  options?: UseIngredientsOptions
-) {
+export function useIngredients(params?: IngredientSearchParams, options?: UseIngredientsOptions) {
   return useQuery({
     queryKey: queryKeys.ingredients.list(params),
     queryFn: async (): Promise<PaginatedResponse<Ingredient>> => {
@@ -46,10 +38,7 @@ export function useIngredients(
 }
 
 // Search ingredients by query string
-export function useIngredientsSearch(
-  query: string,
-  options?: UseIngredientsOptions
-) {
+export function useIngredientsSearch(query: string, options?: UseIngredientsOptions) {
   return useQuery({
     queryKey: queryKeys.ingredients.search(query),
     queryFn: async (): Promise<Ingredient[]> => {
@@ -57,14 +46,15 @@ export function useIngredientsSearch(
         return [];
       }
 
-      const response = await apiClient.get<
-        PaginatedResponse<Ingredient> | { data: Ingredient[] }
-      >("/ingredients", {
-        params: {
-          query: query.trim(),
-          per_page: "20",
-        },
-      });
+      const response = await apiClient.get<PaginatedResponse<Ingredient> | { data: Ingredient[] }>(
+        "/ingredients",
+        {
+          params: {
+            query: query.trim(),
+            per_page: "20",
+          },
+        }
+      );
 
       return response.data;
     },
@@ -75,16 +65,13 @@ export function useIngredientsSearch(
 }
 
 // Fetch single ingredient by ID
-export function useIngredient(
-  id: number,
-  options?: { enabled?: boolean }
-) {
+export function useIngredient(id: number, options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: queryKeys.ingredients.detail(id),
     queryFn: async (): Promise<Ingredient> => {
-      const response = await apiClient.get<
-        ApiResponse<Ingredient> | Ingredient
-      >(`/ingredients/${id}`);
+      const response = await apiClient.get<ApiResponse<Ingredient> | Ingredient>(
+        `/ingredients/${id}`
+      );
 
       // Handle both wrapped and unwrapped responses
       return "data" in response ? response.data : response;
@@ -94,10 +81,7 @@ export function useIngredient(
 }
 
 // Fetch multiple ingredients by IDs (for pre-fetching selected ingredients)
-export function useIngredientsByIds(
-  ids: number[],
-  options?: { enabled?: boolean }
-) {
+export function useIngredientsByIds(ids: number[], options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: ["ingredients", "byIds", ids.sort()],
     queryFn: async (): Promise<Ingredient[]> => {
@@ -107,16 +91,12 @@ export function useIngredientsByIds(
 
       // Fetch in parallel
       const promises = ids.map((id) =>
-        apiClient.get<ApiResponse<Ingredient> | Ingredient>(
-          `/ingredients/${id}`
-        )
+        apiClient.get<ApiResponse<Ingredient> | Ingredient>(`/ingredients/${id}`)
       );
 
       const results = await Promise.all(promises);
 
-      return results.map((response) =>
-        "data" in response ? response.data : response
-      );
+      return results.map((response) => ("data" in response ? response.data : response));
     },
     enabled: options?.enabled !== false && ids.length > 0,
   });

@@ -1,12 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/api/client";
 import { queryKeys } from "@/lib/query-client";
-import type {
-  Category,
-  ApiResponse,
-  PaginatedResponse,
-  PaginationMeta,
-} from "@/types";
+import type { Category, ApiResponse, PaginatedResponse, PaginationMeta } from "@/types";
 
 interface UseCategoriesParams {
   page?: number;
@@ -18,10 +13,7 @@ interface UseCategoriesOptions {
 }
 
 // Fetch all categories (paginated)
-export function useCategories(
-  params?: UseCategoriesParams,
-  options?: UseCategoriesOptions
-) {
+export function useCategories(params?: UseCategoriesParams, options?: UseCategoriesOptions) {
   return useQuery({
     queryKey: queryKeys.categories.list(params),
     queryFn: async (): Promise<PaginatedResponse<Category>> => {
@@ -47,11 +39,12 @@ export function useCategoriesList(options?: UseCategoriesOptions) {
   return useQuery({
     queryKey: queryKeys.categories.lists(),
     queryFn: async (): Promise<Category[]> => {
-      const response = await apiClient.get<
-        PaginatedResponse<Category> | { data: Category[] }
-      >("/categories", {
-        params: { per_page: "100" },
-      });
+      const response = await apiClient.get<PaginatedResponse<Category> | { data: Category[] }>(
+        "/categories",
+        {
+          params: { per_page: "100" },
+        }
+      );
 
       // Handle both paginated and non-paginated responses
       return response.data;
@@ -62,16 +55,11 @@ export function useCategoriesList(options?: UseCategoriesOptions) {
 }
 
 // Fetch single category by ID
-export function useCategory(
-  id: number,
-  options?: { enabled?: boolean }
-) {
+export function useCategory(id: number, options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: queryKeys.categories.detail(id),
     queryFn: async (): Promise<Category> => {
-      const response = await apiClient.get<ApiResponse<Category> | Category>(
-        `/categories/${id}`
-      );
+      const response = await apiClient.get<ApiResponse<Category> | Category>(`/categories/${id}`);
 
       // Handle both wrapped and unwrapped responses
       return "data" in response ? response.data : response;

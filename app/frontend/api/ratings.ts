@@ -13,20 +13,14 @@ export async function listRatings(
   recipeId: number,
   params?: ListRatingsParams
 ): Promise<RatingsListResponse> {
-  return apiClient.get<RatingsListResponse>(
-    `/recipes/${recipeId}/ratings`,
-    { params }
-  );
+  return apiClient.get<RatingsListResponse>(`/recipes/${recipeId}/ratings`, { params });
 }
 
 /**
  * Create or update a rating for a recipe (requires authentication)
  * If the user already has a rating for this recipe, it will be updated
  */
-export async function createRating(
-  recipeId: number,
-  data: CreateRatingRequest
-): Promise<Rating> {
+export async function createRating(recipeId: number, data: CreateRatingRequest): Promise<Rating> {
   return apiClient.post<Rating>(`/recipes/${recipeId}/ratings`, data);
 }
 

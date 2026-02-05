@@ -11,14 +11,7 @@ import { DifficultyBadge, CategoryBadge } from "@/components/ui/Badge";
 import { Rating } from "@/components/ui/Rating";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Alert } from "@/components/ui/Alert";
-import {
-  Search,
-  Clock,
-  DollarSign,
-  ChefHat,
-  Users,
-  Wallet,
-} from "lucide-react";
+import { Search, Clock, DollarSign, ChefHat, Users, Wallet } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { RecipeWithBudgetInfo } from "@/types";
 
@@ -55,9 +48,7 @@ export default function SearchByBudgetPage() {
       setResults(response.data);
       setHasSearched(true);
     } catch (err) {
-      setSearchError(
-        err instanceof Error ? err.message : "Search failed. Please try again."
-      );
+      setSearchError(err instanceof Error ? err.message : "Search failed. Please try again.");
     } finally {
       setIsSearching(false);
     }
@@ -67,9 +58,7 @@ export default function SearchByBudgetPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-          Search by Budget
-        </h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Search by Budget</h1>
         <p className="text-gray-600 mt-1">
           Set your budget and discover delicious meals you can afford
         </p>
@@ -90,9 +79,7 @@ export default function SearchByBudgetPage() {
                   <Input
                     type="number"
                     value={budgetUah}
-                    onChange={(e) =>
-                      setBudget(Math.round(Number(e.target.value) * 100))
-                    }
+                    onChange={(e) => setBudget(Math.round(Number(e.target.value) * 100))}
                     min={0}
                     step={10}
                     placeholder="Enter budget in UAH"
@@ -119,9 +106,7 @@ export default function SearchByBudgetPage() {
                   options={categoryOptions}
                   value={categoryId ? String(categoryId) : ""}
                   onChange={(e) =>
-                    setCategoryId(
-                      e.target.value ? Number(e.target.value) : undefined
-                    )
+                    setCategoryId(e.target.value ? Number(e.target.value) : undefined)
                   }
                 />
               </div>
@@ -156,9 +141,7 @@ export default function SearchByBudgetPage() {
             <Card className="text-center py-12">
               <CardBody>
                 <ChefHat className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
-                  No recipes found
-                </h3>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No recipes found</h3>
                 <p className="text-gray-600">
                   Try increasing your budget or adjusting the number of servings
                 </p>
@@ -195,13 +178,9 @@ export default function SearchByBudgetPage() {
                         {/* Info */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-semibold text-gray-900 truncate">
-                              {result.title}
-                            </h3>
+                            <h3 className="font-semibold text-gray-900 truncate">{result.title}</h3>
                             <DifficultyBadge difficulty={result.difficulty} />
-                            {result.category && (
-                              <CategoryBadge category={result.category.name} />
-                            )}
+                            {result.category && <CategoryBadge category={result.category.name} />}
                           </div>
 
                           {/* Budget Bar */}
@@ -229,9 +208,7 @@ export default function SearchByBudgetPage() {
                           <div className="flex items-center gap-3 text-sm text-gray-500">
                             <span className="flex items-center gap-1">
                               <DollarSign className="h-3.5 w-3.5" />
-                              Remaining:{" "}
-                              {(result.remainingBudgetCents / 100).toFixed(0)}{" "}
-                              UAH
+                              Remaining: {(result.remainingBudgetCents / 100).toFixed(0)} UAH
                             </span>
                             <span className="flex items-center gap-1">
                               <Clock className="h-3.5 w-3.5" />
@@ -261,12 +238,10 @@ export default function SearchByBudgetPage() {
             <Card className="text-center py-16">
               <CardBody>
                 <Wallet className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
-                  Set your budget
-                </h3>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">Set your budget</h3>
                 <p className="text-gray-600 max-w-md mx-auto">
-                  Enter your budget and the number of servings, and we&apos;ll
-                  find recipes that fit your wallet.
+                  Enter your budget and the number of servings, and we&apos;ll find recipes that fit
+                  your wallet.
                 </p>
               </CardBody>
             </Card>

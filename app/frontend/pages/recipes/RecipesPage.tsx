@@ -47,11 +47,8 @@ export default function RecipesPage() {
   const filters: RecipeSearchParams = useMemo(
     () => ({
       query: searchParams.get("query") || undefined,
-      categoryId: searchParams.get("category")
-        ? Number(searchParams.get("category"))
-        : undefined,
-      difficulty: (searchParams.get("difficulty") as RecipeSearchParams["difficulty"]) ||
-        undefined,
+      categoryId: searchParams.get("category") ? Number(searchParams.get("category")) : undefined,
+      difficulty: (searchParams.get("difficulty") as RecipeSearchParams["difficulty"]) || undefined,
       sort: (searchParams.get("sort") as RecipeSearchParams["sort"]) || undefined,
       order: (searchParams.get("order") as "asc" | "desc") || undefined,
       page: searchParams.get("page") ? Number(searchParams.get("page")) : 1,
@@ -108,10 +105,7 @@ export default function RecipesPage() {
   };
 
   const hasActiveFilters =
-    filters.query ||
-    filters.categoryId ||
-    filters.difficulty ||
-    filters.sort;
+    filters.query || filters.categoryId || filters.difficulty || filters.sort;
 
   const recipes = recipesQuery.data?.data || [];
   const meta = recipesQuery.data?.meta;
@@ -121,12 +115,8 @@ export default function RecipesPage() {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-            Recipes
-          </h1>
-          <p className="text-gray-600 mt-1">
-            Discover delicious recipes for every occasion
-          </p>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Recipes</h1>
+          <p className="text-gray-600 mt-1">Discover delicious recipes for every occasion</p>
         </div>
 
         <Button
@@ -212,7 +202,7 @@ export default function RecipesPage() {
           {filters.query && (
             <span>
               {" "}
-              for "<strong>{filters.query}</strong>"
+              for &ldquo;<strong>{filters.query}</strong>&rdquo;
             </span>
           )}
         </div>
@@ -236,12 +226,8 @@ export default function RecipesPage() {
         <Card className="text-center py-12">
           <CardBody>
             <ChefHat className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
-              No recipes found
-            </h3>
-            <p className="text-gray-600 mb-4">
-              Try adjusting your filters or search terms
-            </p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No recipes found</h3>
+            <p className="text-gray-600 mb-4">Try adjusting your filters or search terms</p>
             {hasActiveFilters && (
               <Button variant="outline" onClick={clearFilters}>
                 Clear Filters
@@ -329,9 +315,7 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
           </h3>
 
           {recipe.description && (
-            <p className="text-sm text-gray-600 line-clamp-2 mb-3">
-              {recipe.description}
-            </p>
+            <p className="text-sm text-gray-600 line-clamp-2 mb-3">{recipe.description}</p>
           )}
 
           {/* Rating */}

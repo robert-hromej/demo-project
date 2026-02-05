@@ -53,15 +53,11 @@ export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(
         )}
         {...props}
       >
-        {displayIcon && (
-          <div className="text-gray-400 mb-4">{displayIcon}</div>
-        )}
+        {displayIcon && <div className="text-gray-400 mb-4">{displayIcon}</div>}
 
         <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
 
-        {description && (
-          <p className="text-gray-600 max-w-sm mb-6">{description}</p>
-        )}
+        {description && <p className="text-gray-600 max-w-sm mb-6">{description}</p>}
 
         {children}
 
@@ -104,11 +100,7 @@ export const SearchEmptyState = forwardRef<HTMLDivElement, SearchEmptyStateProps
             ? `We couldn't find any results for "${searchTerm}". Try adjusting your search or filters.`
             : "Try adjusting your search or filters to find what you're looking for."
         }
-        action={
-          onClearSearch
-            ? { label: "Clear search", onClick: onClearSearch }
-            : undefined
-        }
+        action={onClearSearch ? { label: "Clear search", onClick: onClearSearch } : undefined}
         {...props}
       />
     );
@@ -129,11 +121,7 @@ export const RecipeEmptyState = forwardRef<HTMLDivElement, RecipeEmptyStateProps
         variant="empty"
         title="No recipes yet"
         description="You haven't saved any recipes yet. Browse our collection to find something delicious!"
-        action={
-          onBrowseRecipes
-            ? { label: "Browse recipes", onClick: onBrowseRecipes }
-            : undefined
-        }
+        action={onBrowseRecipes ? { label: "Browse recipes", onClick: onBrowseRecipes } : undefined}
         {...props}
       />
     );
@@ -155,9 +143,7 @@ export const FavoritesEmptyState = forwardRef<HTMLDivElement, FavoritesEmptyStat
         title="No favorites yet"
         description="Start adding recipes to your favorites to quickly access them later."
         action={
-          onBrowseRecipes
-            ? { label: "Discover recipes", onClick: onBrowseRecipes }
-            : undefined
+          onBrowseRecipes ? { label: "Discover recipes", onClick: onBrowseRecipes } : undefined
         }
         {...props}
       />

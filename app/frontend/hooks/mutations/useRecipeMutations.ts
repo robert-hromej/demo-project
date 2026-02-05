@@ -15,9 +15,7 @@ interface UseMutationOptions<T> {
 }
 
 // Helper to convert recipe request to snake_case
-function toSnakeCase(
-  request: CreateRecipeRequest | UpdateRecipeRequest
-): Record<string, unknown> {
+function toSnakeCase(request: CreateRecipeRequest | UpdateRecipeRequest): Record<string, unknown> {
   const body: Record<string, unknown> = {};
 
   if ("title" in request && request.title !== undefined) {
@@ -45,15 +43,13 @@ function toSnakeCase(
     body.difficulty = request.difficulty;
   }
   if ("ingredients" in request && request.ingredients !== undefined) {
-    body.recipe_ingredients_attributes = request.ingredients.map(
-      (ing: RecipeIngredientInput) => ({
-        ingredient_id: ing.ingredientId,
-        quantity: ing.quantity,
-        unit: ing.unit,
-        notes: ing.notes,
-        optional: ing.optional,
-      })
-    );
+    body.recipe_ingredients_attributes = request.ingredients.map((ing: RecipeIngredientInput) => ({
+      ingredient_id: ing.ingredientId,
+      quantity: ing.quantity,
+      unit: ing.unit,
+      notes: ing.notes,
+      optional: ing.optional,
+    }));
   }
 
   return body;
@@ -67,10 +63,9 @@ export function useCreateRecipe(options?: UseMutationOptions<Recipe>) {
     mutationFn: async (request: CreateRecipeRequest): Promise<Recipe> => {
       const body = toSnakeCase(request);
 
-      const response = await apiClient.post<ApiResponse<Recipe> | Recipe>(
-        "/recipes",
-        { recipe: body }
-      );
+      const response = await apiClient.post<ApiResponse<Recipe> | Recipe>("/recipes", {
+        recipe: body,
+      });
 
       return "data" in response ? response.data : response;
     },
@@ -100,10 +95,9 @@ export function useUpdateRecipe(options?: UseMutationOptions<Recipe>) {
     }: UpdateRecipeRequest & { id: number }): Promise<Recipe> => {
       const body = toSnakeCase(request);
 
-      const response = await apiClient.patch<ApiResponse<Recipe> | Recipe>(
-        `/recipes/${id}`,
-        { recipe: body }
-      );
+      const response = await apiClient.patch<ApiResponse<Recipe> | Recipe>(`/recipes/${id}`, {
+        recipe: body,
+      });
 
       return "data" in response ? response.data : response;
     },

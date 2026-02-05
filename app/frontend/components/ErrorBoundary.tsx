@@ -96,13 +96,9 @@ export function ErrorFallback({
       {showError && error && (
         <div className="mb-6 w-full max-w-lg rounded-lg bg-gray-100 p-4 text-left">
           <p className="mb-2 text-sm font-medium text-gray-700">Error details:</p>
-          <pre className="overflow-auto text-xs text-red-600">
-            {error.message}
-          </pre>
+          <pre className="overflow-auto text-xs text-red-600">{error.message}</pre>
           {error.stack && (
-            <pre className="mt-2 overflow-auto text-xs text-gray-500">
-              {error.stack}
-            </pre>
+            <pre className="mt-2 overflow-auto text-xs text-gray-500">{error.stack}</pre>
           )}
         </div>
       )}
@@ -148,11 +144,7 @@ export interface InlineErrorProps {
   className?: string;
 }
 
-export function InlineError({
-  message,
-  onRetry,
-  className,
-}: InlineErrorProps): ReactNode {
+export function InlineError({ message, onRetry, className }: InlineErrorProps): ReactNode {
   return (
     <div
       className={cn(

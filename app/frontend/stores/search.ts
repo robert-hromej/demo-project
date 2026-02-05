@@ -49,10 +49,7 @@ interface SearchState extends IngredientSearchState, BudgetSearchState, SearchRe
     results: RecipeWithIngredientMatch[];
     meta: PaginationMeta;
   }) => void;
-  setBudgetResults: (params: {
-    results: RecipeWithBudgetInfo[];
-    meta: PaginationMeta;
-  }) => void;
+  setBudgetResults: (params: { results: RecipeWithBudgetInfo[]; meta: PaginationMeta }) => void;
   clearResults: () => void;
 
   // General actions
@@ -106,9 +103,7 @@ export const useSearchStore = create<SearchState>()(
         const { selectedIngredients } = get();
 
         set({
-          selectedIngredients: selectedIngredients.filter(
-            (i) => i.id !== ingredientId
-          ),
+          selectedIngredients: selectedIngredients.filter((i) => i.id !== ingredientId),
         });
       },
 
@@ -202,20 +197,16 @@ export const useSearchStore = create<SearchState>()(
 );
 
 // Selectors
-export const selectSelectedIngredients = (state: SearchState) =>
-  state.selectedIngredients;
+export const selectSelectedIngredients = (state: SearchState) => state.selectedIngredients;
 export const selectSelectedIngredientIds = (state: SearchState) =>
   state.selectedIngredients.map((i) => i.id);
-export const selectMatchPercentage = (state: SearchState) =>
-  state.matchPercentage;
-export const selectIncludeOptional = (state: SearchState) =>
-  state.includeOptional;
+export const selectMatchPercentage = (state: SearchState) => state.matchPercentage;
+export const selectIncludeOptional = (state: SearchState) => state.includeOptional;
 export const selectBudgetCents = (state: SearchState) => state.budgetCents;
 export const selectServings = (state: SearchState) => state.servings;
 export const selectSearchMode = (state: SearchState) => state.searchMode;
 export const selectIsSearching = (state: SearchState) => state.isSearching;
-export const selectIngredientResults = (state: SearchState) =>
-  state.ingredientResults;
+export const selectIngredientResults = (state: SearchState) => state.ingredientResults;
 export const selectBudgetResults = (state: SearchState) => state.budgetResults;
 
 // Computed selectors

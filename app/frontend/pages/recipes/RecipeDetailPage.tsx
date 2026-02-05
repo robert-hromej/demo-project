@@ -7,15 +7,7 @@ import { Badge, DifficultyBadge, CategoryBadge } from "@/components/ui/Badge";
 import { Rating } from "@/components/ui/Rating";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { Alert } from "@/components/ui/Alert";
-import {
-  Clock,
-  DollarSign,
-  Users,
-  ChefHat,
-  ArrowLeft,
-  CheckCircle2,
-  Circle,
-} from "lucide-react";
+import { Clock, DollarSign, Users, ChefHat, ArrowLeft, CheckCircle2, Circle } from "lucide-react";
 
 export default function RecipeDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -81,17 +73,13 @@ export default function RecipeDetailPage() {
         {/* Info */}
         <div className="md:w-2/3 space-y-4">
           <div className="flex flex-wrap items-center gap-2">
-            {recipe.category && (
-              <CategoryBadge category={recipe.category.name} />
-            )}
+            {recipe.category && <CategoryBadge category={recipe.category.name} />}
             <DifficultyBadge difficulty={recipe.difficulty} />
           </div>
 
           <h1 className="text-3xl font-bold text-gray-900">{recipe.title}</h1>
 
-          {recipe.description && (
-            <p className="text-gray-600 text-lg">{recipe.description}</p>
-          )}
+          {recipe.description && <p className="text-gray-600 text-lg">{recipe.description}</p>}
 
           {/* Rating */}
           {recipe.avgRating !== null && (
@@ -143,9 +131,7 @@ export default function RecipeDetailPage() {
           <CardHeader
             title="Ingredients"
             description={
-              recipe.ingredients
-                ? `${recipe.ingredients.length} ingredients`
-                : undefined
+              recipe.ingredients ? `${recipe.ingredients.length} ingredients` : undefined
             }
           />
           <CardBody>
@@ -162,23 +148,15 @@ export default function RecipeDetailPage() {
                       <span className="font-medium text-gray-900">
                         {ri.quantity} {ri.unit}
                       </span>{" "}
-                      <span className="text-gray-600">
-                        {ri.ingredient.name}
-                      </span>
+                      <span className="text-gray-600">{ri.ingredient.name}</span>
                       {ri.optional && (
                         <Badge size="sm" variant="default" className="ml-2">
                           optional
                         </Badge>
                       )}
-                      {ri.notes && (
-                        <p className="text-xs text-gray-500 mt-0.5">
-                          {ri.notes}
-                        </p>
-                      )}
+                      {ri.notes && <p className="text-xs text-gray-500 mt-0.5">{ri.notes}</p>}
                     </div>
-                    <span className="text-sm text-gray-500">
-                      {ri.estimatedCostFormatted}
-                    </span>
+                    <span className="text-sm text-gray-500">{ri.estimatedCostFormatted}</span>
                   </li>
                 ))}
               </ul>
@@ -206,10 +184,7 @@ export default function RecipeDetailPage() {
       {/* Ratings Section */}
       {ratingsData && ratingsData.data.length > 0 && (
         <Card>
-          <CardHeader
-            title="Reviews"
-            description={`${ratingsData.meta.totalCount} reviews`}
-          />
+          <CardHeader title="Reviews" description={`${ratingsData.meta.totalCount} reviews`} />
           <CardBody>
             <div className="space-y-4">
               {ratingsData.data.map((rating) => (
@@ -219,16 +194,12 @@ export default function RecipeDetailPage() {
                 >
                   <div className="flex items-center gap-2 mb-1">
                     <Rating value={rating.score} size="sm" />
-                    <span className="text-sm font-medium text-gray-900">
-                      {rating.user.name}
-                    </span>
+                    <span className="text-sm font-medium text-gray-900">{rating.user.name}</span>
                     <span className="text-xs text-gray-500">
                       {new Date(rating.createdAt).toLocaleDateString()}
                     </span>
                   </div>
-                  {rating.review && (
-                    <p className="text-sm text-gray-600">{rating.review}</p>
-                  )}
+                  {rating.review && <p className="text-sm text-gray-600">{rating.review}</p>}
                 </div>
               ))}
             </div>

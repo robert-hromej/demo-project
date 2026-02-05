@@ -1,15 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import { Card, CardBody } from "@/components/ui/Card";
-import {
-  ChefHat,
-  Search,
-  DollarSign,
-  Clock,
-  Star,
-  ArrowRight,
-  Utensils,
-} from "lucide-react";
+import { ChefHat, Search, DollarSign, Clock, Star, ArrowRight, Utensils } from "lucide-react";
 
 const features = [
   {
@@ -24,8 +16,7 @@ const features = [
   {
     icon: DollarSign,
     title: "Search by Budget",
-    description:
-      "Set your budget and discover delicious meals that won't break the bank.",
+    description: "Set your budget and discover delicious meals that won't break the bank.",
     href: "/search/budget",
     color: "text-green-500",
     bgColor: "bg-green-50",
@@ -33,8 +24,7 @@ const features = [
   {
     icon: Utensils,
     title: "Browse Recipes",
-    description:
-      "Explore our collection of recipes, filter by category, difficulty, and more.",
+    description: "Explore our collection of recipes, filter by category, difficulty, and more.",
     href: "/recipes",
     color: "text-orange-500",
     bgColor: "bg-orange-50",
@@ -70,12 +60,11 @@ export default function HomePage() {
           </div>
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          Welcome to{" "}
-          <span className="text-orange-500">RecipeMatch</span>
+          Welcome to <span className="text-orange-500">RecipeMatch</span>
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-          Find the perfect recipe based on what you have in your kitchen or your
-          budget. Cooking made easy!
+          Find the perfect recipe based on what you have in your kitchen or your budget. Cooking
+          made easy!
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/search/ingredients">
@@ -84,11 +73,7 @@ export default function HomePage() {
             </Button>
           </Link>
           <Link to="/recipes">
-            <Button
-              variant="outline"
-              size="lg"
-              leftIcon={<Utensils className="h-5 w-5" />}
-            >
+            <Button variant="outline" size="lg" leftIcon={<Utensils className="h-5 w-5" />}>
               Browse Recipes
             </Button>
           </Link>
@@ -107,9 +92,7 @@ export default function HomePage() {
               <Link key={feature.href} to={feature.href} className="group">
                 <Card className="h-full transition-shadow hover:shadow-md">
                   <CardBody>
-                    <div
-                      className={`inline-flex p-3 rounded-lg ${feature.bgColor} mb-4`}
-                    >
+                    <div className={`inline-flex p-3 rounded-lg ${feature.bgColor} mb-4`}>
                       <Icon className={`h-6 w-6 ${feature.color}`} />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
@@ -141,9 +124,7 @@ export default function HomePage() {
                 <div className="inline-flex p-3 rounded-full bg-orange-100 mb-4">
                   <Icon className="h-6 w-6 text-orange-500" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {item.value}
-                </h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.value}</h3>
                 <p className="text-gray-600">{item.description}</p>
               </div>
             );
@@ -153,9 +134,7 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="text-center py-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl text-white">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">
-          Ready to Start Cooking?
-        </h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Start Cooking?</h2>
         <p className="text-lg text-orange-100 mb-6 max-w-xl mx-auto">
           Join our community and discover new recipes tailored to your needs.
         </p>

@@ -54,11 +54,7 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
     const currentYear = new Date().getFullYear();
 
     return (
-      <footer
-        ref={ref}
-        className={cn("bg-gray-50 border-t border-gray-200", className)}
-        {...props}
-      >
+      <footer ref={ref} className={cn("bg-gray-50 border-t border-gray-200", className)} {...props}>
         <Container>
           <div className="py-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">

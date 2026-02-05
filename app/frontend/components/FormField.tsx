@@ -12,28 +12,14 @@ export interface FormFieldProps {
 }
 
 export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
-  (
-    {
-      label,
-      htmlFor,
-      error,
-      hint,
-      required = false,
-      className,
-      children,
-    },
-    ref
-  ) => {
+  ({ label, htmlFor, error, hint, required = false, className, children }, ref) => {
     const fieldId = htmlFor || `field-${Math.random().toString(36).slice(2, 9)}`;
     const hasError = Boolean(error);
 
     return (
       <div ref={ref} className={cn("flex flex-col gap-1.5", className)}>
         {label && (
-          <label
-            htmlFor={fieldId}
-            className="text-sm font-medium text-gray-700"
-          >
+          <label htmlFor={fieldId} className="text-sm font-medium text-gray-700">
             {label}
             {required && (
               <span className="ml-1 text-red-500" aria-hidden="true">
@@ -46,11 +32,7 @@ export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
         {children}
 
         {error && (
-          <p
-            id={`${fieldId}-error`}
-            className="text-sm text-red-600"
-            role="alert"
-          >
+          <p id={`${fieldId}-error`} className="text-sm text-red-600" role="alert">
             {error}
           </p>
         )}
@@ -79,12 +61,7 @@ export const ControlledFormField = forwardRef<HTMLDivElement, ControlledFormFiel
     const hasError = Boolean(error?.message);
 
     return (
-      <FormField
-        ref={ref}
-        htmlFor={fieldId}
-        error={error?.message}
-        {...props}
-      >
+      <FormField ref={ref} htmlFor={fieldId} error={error?.message} {...props}>
         {render({ id: fieldId, hasError })}
       </FormField>
     );

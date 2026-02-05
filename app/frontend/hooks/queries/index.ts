@@ -1,9 +1,5 @@
 // Query hooks barrel export
-export {
-  useCategories,
-  useCategoriesList,
-  useCategory,
-} from "./useCategories";
+export { useCategories, useCategoriesList, useCategory } from "./useCategories";
 
 export {
   useIngredients,
@@ -12,11 +8,7 @@ export {
   useIngredientsByIds,
 } from "./useIngredients";
 
-export {
-  useRecipes,
-  useRecipesSearch,
-  useRecipe,
-} from "./useRecipes";
+export { useRecipes, useRecipesSearch, useRecipe } from "./useRecipes";
 
 export { useRatings } from "./useRatings";
 
@@ -32,7 +24,4 @@ export type {
   SearchByIngredientsRequest,
   SearchByIngredientsResponse,
 } from "./useSearchByIngredients";
-export type {
-  SearchByBudgetRequest,
-  SearchByBudgetResponse,
-} from "./useSearchByBudget";
+export type { SearchByBudgetRequest, SearchByBudgetResponse } from "./useSearchByBudget";

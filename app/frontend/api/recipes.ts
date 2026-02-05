@@ -10,9 +10,7 @@ import type {
 /**
  * List/search recipes with pagination and filters
  */
-export async function listRecipes(
-  params?: RecipeSearchParams
-): Promise<PaginatedResponse<Recipe>> {
+export async function listRecipes(params?: RecipeSearchParams): Promise<PaginatedResponse<Recipe>> {
   return apiClient.get<PaginatedResponse<Recipe>>("/recipes", { params });
 }
 
@@ -43,10 +41,7 @@ export async function createRecipe(data: CreateRecipeRequest): Promise<Recipe> {
 /**
  * Update an existing recipe (requires authentication)
  */
-export async function updateRecipe(
-  id: number,
-  data: UpdateRecipeRequest
-): Promise<Recipe> {
+export async function updateRecipe(id: number, data: UpdateRecipeRequest): Promise<Recipe> {
   return apiClient.put<Recipe>(`/recipes/${id}`, data);
 }
 

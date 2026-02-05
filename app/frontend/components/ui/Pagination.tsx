@@ -59,7 +59,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       totalPages,
       onPageChange,
       siblingCount = 1,
-      showFirstLast = true,
+      showFirstLast: _showFirstLast = true,
       disabled = false,
       ...props
     },
@@ -135,8 +135,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
 
 Pagination.displayName = "Pagination";
 
-interface PaginationButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface PaginationButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isActive?: boolean;
 }
 
@@ -176,18 +175,14 @@ export interface PaginationInfoProps extends HTMLAttributes<HTMLDivElement> {
 
 export const PaginationInfo = forwardRef<HTMLDivElement, PaginationInfoProps>(
   (
-    { className, currentPage, totalPages, totalItems, itemsPerPage, ...props },
+    { className, currentPage, totalPages: _totalPages, totalItems, itemsPerPage, ...props },
     ref
   ) => {
     const startItem = (currentPage - 1) * itemsPerPage + 1;
     const endItem = Math.min(currentPage * itemsPerPage, totalItems);
 
     return (
-      <div
-        ref={ref}
-        className={cn("text-sm text-gray-600", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("text-sm text-gray-600", className)} {...props}>
         Showing <span className="font-medium">{startItem}</span> to{" "}
         <span className="font-medium">{endItem}</span> of{" "}
         <span className="font-medium">{totalItems}</span> results

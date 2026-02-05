@@ -1,25 +1,14 @@
 import React from "react";
-import {
-  createBrowserRouter,
-  Navigate,
-  Outlet,
-  useLocation,
-} from "react-router-dom";
+import { createBrowserRouter, Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuthStore } from "@/stores/auth";
 import { MainLayout } from "@/components/layouts/MainLayout";
 
 // Lazy load pages for code splitting
 const HomePage = React.lazy(() => import("@/pages/home/HomePage"));
 const RecipesPage = React.lazy(() => import("@/pages/recipes/RecipesPage"));
-const RecipeDetailPage = React.lazy(
-  () => import("@/pages/recipes/RecipeDetailPage")
-);
-const SearchByIngredientsPage = React.lazy(
-  () => import("@/pages/search/SearchByIngredientsPage")
-);
-const SearchByBudgetPage = React.lazy(
-  () => import("@/pages/search/SearchByBudgetPage")
-);
+const RecipeDetailPage = React.lazy(() => import("@/pages/recipes/RecipeDetailPage"));
+const SearchByIngredientsPage = React.lazy(() => import("@/pages/search/SearchByIngredientsPage"));
+const SearchByBudgetPage = React.lazy(() => import("@/pages/search/SearchByBudgetPage"));
 const LoginPage = React.lazy(() => import("@/pages/auth/LoginPage"));
 const RegisterPage = React.lazy(() => import("@/pages/auth/RegisterPage"));
 const NotFoundPage = React.lazy(() => import("@/pages/NotFoundPage"));

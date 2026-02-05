@@ -17,14 +17,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
     "bg-orange-500 text-white hover:bg-orange-600 focus:ring-orange-500 active:bg-orange-700",
-  secondary:
-    "bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-500 active:bg-gray-300",
+  secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-500 active:bg-gray-300",
   outline:
     "border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 focus:ring-gray-500 active:bg-gray-100",
-  ghost:
-    "bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-500 active:bg-gray-200",
-  destructive:
-    "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500 active:bg-red-700",
+  ghost: "bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-500 active:bg-gray-200",
+  destructive: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500 active:bg-red-700",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -78,9 +75,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           leftIcon && <span className={iconSizes[size]}>{leftIcon}</span>
         )}
         {children}
-        {!isLoading && rightIcon && (
-          <span className={iconSizes[size]}>{rightIcon}</span>
-        )}
+        {!isLoading && rightIcon && <span className={iconSizes[size]}>{rightIcon}</span>}
       </button>
     );
   }

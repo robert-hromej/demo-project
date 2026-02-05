@@ -19,17 +19,7 @@ const sizeStyles: Record<ContainerSize, string> = {
 };
 
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(
-  (
-    {
-      className,
-      size = "xl",
-      padding = true,
-      centered = true,
-      children,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, size = "xl", padding = true, centered = true, children, ...props }, ref) => {
     return (
       <div
         ref={ref}

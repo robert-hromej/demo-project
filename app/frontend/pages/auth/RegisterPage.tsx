@@ -40,9 +40,7 @@ export default function RegisterPage() {
       login({ user: response.user, token: response.token });
       navigate("/", { replace: true });
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Registration failed. Please try again."
-      );
+      setError(err instanceof Error ? err.message : "Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -56,9 +54,7 @@ export default function RegisterPage() {
             <ChefHat className="h-10 w-10" />
             <span className="text-2xl font-bold text-gray-900">RecipeMatch</span>
           </Link>
-          <h1 className="mt-6 text-2xl font-bold text-gray-900">
-            Create your account
-          </h1>
+          <h1 className="mt-6 text-2xl font-bold text-gray-900">Create your account</h1>
           <p className="mt-2 text-gray-600">
             Already have an account?{" "}
             <Link to="/login" className="text-orange-600 hover:text-orange-500 font-medium">
@@ -116,11 +112,7 @@ export default function RegisterPage() {
                 autoComplete="new-password"
               />
 
-              <Button
-                type="submit"
-                fullWidth
-                isLoading={isLoading}
-              >
+              <Button type="submit" fullWidth isLoading={isLoading}>
                 Create account
               </Button>
             </form>

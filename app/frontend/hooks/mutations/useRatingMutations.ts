@@ -9,10 +9,7 @@ interface UseMutationOptions<T> {
 }
 
 // Create rating mutation
-export function useCreateRating(
-  recipeId: number,
-  options?: UseMutationOptions<Rating>
-) {
+export function useCreateRating(recipeId: number, options?: UseMutationOptions<Rating>) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -52,10 +49,7 @@ export function useCreateRating(
 }
 
 // Delete rating mutation
-export function useDeleteRating(
-  recipeId: number,
-  options?: UseMutationOptions<void>
-) {
+export function useDeleteRating(recipeId: number, options?: UseMutationOptions<void>) {
   const queryClient = useQueryClient();
 
   return useMutation({

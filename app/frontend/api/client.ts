@@ -72,10 +72,7 @@ function toCamelCase(str: string): string {
 /**
  * Recursively transform object keys
  */
-function transformKeys<T>(
-  obj: unknown,
-  transformer: (key: string) => string
-): T {
+function transformKeys<T>(obj: unknown, transformer: (key: string) => string): T {
   if (obj === null || obj === undefined) {
     return obj as T;
   }
@@ -140,10 +137,7 @@ class ApiClient {
     return url;
   }
 
-  private async request<T>(
-    endpoint: string,
-    options: RequestOptions = {}
-  ): Promise<T> {
+  private async request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
     const { params, ...fetchOptions } = options;
 
     const url = this.buildUrl(endpoint, params);
@@ -161,9 +155,7 @@ class ApiClient {
     }
 
     // Add CSRF token for Rails
-    const csrfToken = document
-      .querySelector('meta[name="csrf-token"]')
-      ?.getAttribute("content");
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content");
     if (csrfToken) {
       (headers as Record<string, string>)["X-CSRF-Token"] = csrfToken;
     }
@@ -188,9 +180,7 @@ class ApiClient {
         }>(errorData);
 
         error.message =
-          transformedError.message ||
-          transformedError.error?.message ||
-          error.message;
+          transformedError.message || transformedError.error?.message || error.message;
         error.errors = transformedError.errors;
       } catch {
         // Ignore JSON parsing errors
@@ -211,11 +201,7 @@ class ApiClient {
     return this.request<T>(endpoint, { ...options, method: "GET" });
   }
 
-  async post<T>(
-    endpoint: string,
-    data?: unknown,
-    options?: RequestOptions
-  ): Promise<T> {
+  async post<T>(endpoint: string, data?: unknown, options?: RequestOptions): Promise<T> {
     return this.request<T>(endpoint, {
       ...options,
       method: "POST",
@@ -223,11 +209,7 @@ class ApiClient {
     });
   }
 
-  async put<T>(
-    endpoint: string,
-    data?: unknown,
-    options?: RequestOptions
-  ): Promise<T> {
+  async put<T>(endpoint: string, data?: unknown, options?: RequestOptions): Promise<T> {
     return this.request<T>(endpoint, {
       ...options,
       method: "PUT",
@@ -235,11 +217,7 @@ class ApiClient {
     });
   }
 
-  async patch<T>(
-    endpoint: string,
-    data?: unknown,
-    options?: RequestOptions
-  ): Promise<T> {
+  async patch<T>(endpoint: string, data?: unknown, options?: RequestOptions): Promise<T> {
     return this.request<T>(endpoint, {
       ...options,
       method: "PATCH",

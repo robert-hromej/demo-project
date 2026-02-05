@@ -13,9 +13,7 @@ export function useSearchByBudget(options?: UseSearchByBudgetOptions) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (
-      request: SearchByBudgetRequest
-    ): Promise<SearchByBudgetResponse> => {
+    mutationFn: async (request: SearchByBudgetRequest): Promise<SearchByBudgetResponse> => {
       // Convert camelCase to snake_case for API
       const body = {
         budget_cents: request.budgetCents,
@@ -30,10 +28,7 @@ export function useSearchByBudget(options?: UseSearchByBudgetOptions) {
         Object.entries(body).filter(([_, v]) => v !== undefined)
       );
 
-      return apiClient.post<SearchByBudgetResponse>(
-        "/recipes/search_by_budget",
-        cleanBody
-      );
+      return apiClient.post<SearchByBudgetResponse>("/recipes/search_by_budget", cleanBody);
     },
     onSuccess: (data, variables) => {
       // Cache the search results

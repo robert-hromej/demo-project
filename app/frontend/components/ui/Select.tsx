@@ -39,10 +39,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className={cn("flex flex-col gap-1.5", fullWidth && "w-full")}>
         {label && (
-          <label
-            htmlFor={selectId}
-            className="text-sm font-medium text-gray-700"
-          >
+          <label htmlFor={selectId} className="text-sm font-medium text-gray-700">
             {label}
           </label>
         )}
@@ -74,11 +71,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               </option>
             )}
             {options.map((option) => (
-              <option
-                key={option.value}
-                value={option.value}
-                disabled={option.disabled}
-              >
+              <option key={option.value} value={option.value} disabled={option.disabled}>
                 {option.label}
               </option>
             ))}

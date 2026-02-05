@@ -3,15 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/stores/auth";
 import { useLogout } from "@/hooks/mutations/useAuth";
 import { Button } from "@/components/ui/Button";
-import {
-  ChefHat,
-  Search,
-  DollarSign,
-  Menu,
-  X,
-  User,
-  LogOut,
-} from "lucide-react";
+import { ChefHat, Search, DollarSign, Menu, X, User, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface MainLayoutProps {
@@ -52,10 +44,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         <nav className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
-            <Link
-              to="/"
-              className="flex items-center gap-2 text-xl font-bold text-orange-600"
-            >
+            <Link to="/" className="flex items-center gap-2 text-xl font-bold text-orange-600">
               <ChefHat className="h-8 w-8" />
               <span className="hidden sm:inline">RecipeMatch</span>
             </Link>
@@ -123,11 +112,7 @@ export function MainLayout({ children }: MainLayoutProps) {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
 

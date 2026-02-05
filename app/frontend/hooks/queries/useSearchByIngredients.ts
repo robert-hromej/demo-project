@@ -1,10 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "@/api/client";
 import { queryKeys } from "@/lib/query-client";
-import type {
-  SearchByIngredientsRequest,
-  SearchByIngredientsResponse,
-} from "@/types";
+import type { SearchByIngredientsRequest, SearchByIngredientsResponse } from "@/types";
 
 interface UseSearchByIngredientsOptions {
   onSuccess?: (data: SearchByIngredientsResponse) => void;
@@ -12,9 +9,7 @@ interface UseSearchByIngredientsOptions {
 }
 
 // Mutation hook for searching recipes by ingredients
-export function useSearchByIngredients(
-  options?: UseSearchByIngredientsOptions
-) {
+export function useSearchByIngredients(options?: UseSearchByIngredientsOptions) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -44,10 +39,7 @@ export function useSearchByIngredients(
     },
     onSuccess: (data, variables) => {
       // Cache the search results
-      queryClient.setQueryData(
-        queryKeys.search.byIngredients(variables.ingredientIds),
-        data
-      );
+      queryClient.setQueryData(queryKeys.search.byIngredients(variables.ingredientIds), data);
 
       options?.onSuccess?.(data);
     },
