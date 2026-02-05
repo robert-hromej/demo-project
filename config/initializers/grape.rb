@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 # Grape API configuration
-# Explicitly require all API files to avoid Zeitwerk naming conflicts
-# Load in proper order: helpers first, then base classes, then entities, then endpoints
+# Exclude app/api from Zeitwerk: files use Api:: namespace which conflicts
+# with Zeitwerk expectations (app/api/ is an autoload root, so it expects no Api:: prefix).
+Rails.autoloaders.main.ignore(Rails.root.join("app/api"))
+
+# Explicitly require all API files in proper order:
+# helpers first, then base classes, then entities, then endpoints
 [
   "app/api/helpers/api_helpers.rb",
   "app/api/base_endpoint.rb",
